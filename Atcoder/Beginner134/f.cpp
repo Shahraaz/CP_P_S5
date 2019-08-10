@@ -5,6 +5,21 @@ using namespace std;
 // #define multitest 1
 #ifdef Debug
 #define db(...) ZZ(#__VA_ARGS__, __VA_ARGS__);
+#define pc(...) PC(#__VA_ARGS__, __VA_ARGS__);
+template <typename T, typename U>
+ostream &operator<<(ostream &out, const pair<T, U> &p)
+{
+	out << '[' << p.first << ", " << p.second << ']';
+	return out;
+}
+template <typename Arg>
+void PC(const char *name, Arg &&arg)
+{
+	std::cerr << name << " { ";
+	for (const auto &v : arg)
+		cerr << v << ' ';
+	cerr << " }\n";
+}
 template <typename Arg1>
 void ZZ(const char *name, Arg1 &&arg1)
 {
@@ -19,6 +34,7 @@ void ZZ(const char *names, Arg1 &&arg1, Args &&... args)
 }
 #else
 #define db(...)
+#define pc(...)
 #endif
 
 using ll = long long;
@@ -29,9 +45,25 @@ const long long mod = 1000000007;
 auto TimeStart = chrono::steady_clock::now();
 
 const int nax = 2e5 + 10;
+int p;
+
+ll mul(ll a, ll b)
+{
+	return a * b % p;
+}
 
 void solve()
 {
+	cin >> p;
+	vector<int> a(p);
+	vector<vector<int>> Mat(p, vector<int>(p + 1));
+	for (int i = 0; i < p; ++i)
+	{
+		Mat[i][0] = 1;
+		for (int j = 1; j < p; ++j)
+			Mat[i][j] = mul(Mat[i][j - 1], i);
+		cin >> Mat[i][p];
+	}
 }
 
 int main()
@@ -44,7 +76,7 @@ int main()
 #endif
 	while (t--)
 		solve();
-#ifdef TIME
+#ifdef WIN32
 	cerr << "\n\nTime elapsed: " << chrono::duration<double>(chrono::steady_clock::now() - TimeStart).count() << " seconds.\n";
 #endif
 	return 0;

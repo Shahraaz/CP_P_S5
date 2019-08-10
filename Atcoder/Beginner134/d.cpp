@@ -5,6 +5,21 @@ using namespace std;
 // #define multitest 1
 #ifdef Debug
 #define db(...) ZZ(#__VA_ARGS__, __VA_ARGS__);
+#define pc(...) PC(#__VA_ARGS__, __VA_ARGS__);
+template <typename T, typename U>
+ostream &operator<<(ostream &out, const pair<T, U> &p)
+{
+	out << '[' << p.first << ", " << p.second << ']';
+	return out;
+}
+template <typename Arg>
+void PC(const char *name, Arg &&arg)
+{
+	std::cerr << name << " { ";
+	for (const auto &v : arg)
+		cerr << v << ' ';
+	cerr << " }\n";
+}
 template <typename Arg1>
 void ZZ(const char *name, Arg1 &&arg1)
 {
@@ -19,6 +34,7 @@ void ZZ(const char *names, Arg1 &&arg1, Args &&... args)
 }
 #else
 #define db(...)
+#define pc(...)
 #endif
 
 using ll = long long;
@@ -29,54 +45,63 @@ const long long mod = 1000000007;
 auto TimeStart = chrono::steady_clock::now();
 
 const int nax = 2e5 + 10;
+vector<pair<int, int>> a;
+int n, m;
+
+bool solvable(int toGain)
+{
+	set<int> S;
+	for (int i = 1; i <= m; ++i)
+		S.insert(i);
+	for (int i = 0; i < n; ++i)
+	{
+		auto it = S.lower_bound(a[i].s);
+		if (it != S.end())
+		{
+			S.erase(it);
+			toGain -= a[i].f;
+		}
+		if (toGain <= 0)
+			return true;
+	}
+	return toGain <= 0;
+}
+
+ll solver()
+{
+	int low = 0, high = mod, ans;
+	ans = 0;
+	while (low <= high)
+	{
+		int mid = (low + high) / 2;
+		if (solvable(mid))
+		{
+			ans = mid;
+			low = mid + 1;
+		}
+		else
+			high = mid - 1;
+	}
+	return ans;
+}
+
+bool cmp(pair<int, int> a, pair<int, int> b)
+{
+	if (a.f == b.f)
+		return a.s < b.s;
+	return a.f > b.f;
+}
 
 void solve()
 {
-	int n;
-	cin >> n;
-	vector<int> A(n + 1);
-	for (int i = 1; i <= n; ++i)
-		cin >> A[i];
-	auto B = A;
-	vector<int> ans;
-	for (int i = n; i > 0; --i)
-	{
-		if (A[i])
-		{
-			ans.pb(i);
-			int j = i;
-			db(j);
-			for (int k = 1; k * k <= j; ++k)
-			{
-				if (j % k == 0)
-				{
-					if (k == j / k)
-					{
-						db(k);
-						A[k] = (A[k] + 1) % 2;
-					}
-					else
-					{
-						db(k, j / k);
-						A[k] = (A[k] + 1) % 2;
-						A[j / k] = (A[j / k] + 1) % 2;
-					}
-				}
-			}
-		}
-	}
-	vector<int> C = ans;
-	// cout << ans.size() << '\n';
-	for (int i = 1; i <= n; ++i)
-		if (A[i])
-		{
-			db(i);
-			cout << -1;
-			return;
-		}
-	cout << C.size() << '\n';
-	for (int x : C)
-		cout << x << ' ';
+	cin >> n >> m;
+	a = vector<pair<int, int>>(n);
+	for (int i = 0; i < n; ++i)
+		cin >>
+			a[i].s >> a[i].f;
+	sort(a.begin(), a.end(), cmp);
+	// cout << solve(0, 0) << '\n';
+	cout << solver();
 }
 
 int main()
@@ -89,7 +114,7 @@ int main()
 #endif
 	while (t--)
 		solve();
-#ifdef TIME
+#ifdef WIN32
 	cerr << "\n\nTime elapsed: " << chrono::duration<double>(chrono::steady_clock::now() - TimeStart).count() << " seconds.\n";
 #endif
 	return 0;

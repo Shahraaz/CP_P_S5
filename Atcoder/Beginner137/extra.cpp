@@ -48,11 +48,6 @@ const int nax = 2e5 + 10;
 
 void solve()
 {
-	int k, x;
-	cin >> k >> x;
-	set<int> S;
-	for (int i = x - k + 1; i < x + k; ++i)
-		cout << i << ' ';
 }
 
 int main()
@@ -65,7 +60,7 @@ int main()
 #endif
 	while (t--)
 		solve();
-#ifdef WIN32
+#ifdef TIME
 	cerr << "\n\nTime elapsed: " << chrono::duration<double>(chrono::steady_clock::now() - TimeStart).count() << " seconds.\n";
 #endif
 	return 0;

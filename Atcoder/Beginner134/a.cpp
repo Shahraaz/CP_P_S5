@@ -5,6 +5,21 @@ using namespace std;
 // #define multitest 1
 #ifdef Debug
 #define db(...) ZZ(#__VA_ARGS__, __VA_ARGS__);
+#define pc(...) PC(#__VA_ARGS__, __VA_ARGS__);
+template <typename T, typename U>
+ostream &operator<<(ostream &out, const pair<T, U> &p)
+{
+	out << '[' << p.first << ", " << p.second << ']';
+	return out;
+}
+template <typename Arg>
+void PC(const char *name, Arg &&arg)
+{
+	std::cerr << name << " { ";
+	for (const auto &v : arg)
+		cerr << v << ' ';
+	cerr << " }\n";
+}
 template <typename Arg1>
 void ZZ(const char *name, Arg1 &&arg1)
 {
@@ -19,6 +34,7 @@ void ZZ(const char *names, Arg1 &&arg1, Args &&... args)
 }
 #else
 #define db(...)
+#define pc(...)
 #endif
 
 using ll = long long;
@@ -32,9 +48,9 @@ const int nax = 2e5 + 10;
 
 void solve()
 {
-	int a;
-	cin >> a;
-	cout << 3 * a * a;
+	int a, b;
+	cin >> a >> b;
+	cout << max(a + b, max(a - b, a * b));
 }
 
 int main()
@@ -47,7 +63,7 @@ int main()
 #endif
 	while (t--)
 		solve();
-#ifdef TIME
+#ifdef WIN32
 	cerr << "\n\nTime elapsed: " << chrono::duration<double>(chrono::steady_clock::now() - TimeStart).count() << " seconds.\n";
 #endif
 	return 0;
