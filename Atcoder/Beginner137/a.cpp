@@ -48,6 +48,9 @@ const int nax = 2e5 + 10;
 
 void solve()
 {
+	int a, b;
+	cin >> a >> b;
+	cout << max(a + b, max(a - b, a * b));
 }
 
 int main()

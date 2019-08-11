@@ -48,6 +48,11 @@ const int nax = 2e5 + 10;
 
 void solve()
 {
+	int k, x;
+	cin >> k >> x;
+	set<int> S;
+	for (int i = x - k + 1; i < x + k; ++i)
+		cout << i << ' ';
 }
 
 int main()

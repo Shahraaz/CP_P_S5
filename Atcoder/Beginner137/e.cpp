@@ -44,10 +44,54 @@ using ll = long long;
 const long long mod = 1000000007;
 auto TimeStart = chrono::steady_clock::now();
 
-const int nax = 2e5 + 10;
+const int nax = 5e3 + 10;
+pair<int, pair<int, int>> Edges[nax];
+int n, m, p, u, v, w;
 
 void solve()
 {
+	cin >> n >> m >> p;
+	for (int i = 0; i < m; ++i)
+	{
+		cin >> u >> v >> w;
+		Edges[i] = {v, {u, w - p}};
+	}
+	vector<vector<ll>> dp(2, vector<ll>(n + 1, -1e18));
+	bool curr, prev;
+	prev = true;
+	curr = false;
+	dp[prev][1] = 0;
+	for (int step = 1; step < 5 * n; ++step)
+	{
+		for (int i = 0; i < m; ++i)
+		{
+			int parent = Edges[i].s.f;
+			int cost = Edges[i].s.s;
+			int child = Edges[i].f;
+			dp[curr][child] = max(dp[curr][child], cost + dp[prev][parent]);
+		}
+		prev = !prev;
+		curr = !curr;
+	}
+	ll here = max(dp[curr][n], dp[prev][n]);
+	for (int step = 1; step < 5 * n; ++step)
+	{
+		for (int i = 0; i < m; ++i)
+		{
+			int parent = Edges[i].s.f;
+			int cost = Edges[i].s.s;
+			int child = Edges[i].f;
+			dp[curr][child] = max(dp[curr][child], cost + dp[prev][parent]);
+		}
+		prev = !prev;
+		curr = !curr;
+	}
+	ll here2 = max(dp[curr][n], dp[prev][n]);
+	db(here, here2);
+	if (here2 > here)
+		cout << -1 << '\n';
+	else
+		cout << max(here, 0LL) << '\n';
 }
 
 int main()
@@ -60,7 +104,7 @@ int main()
 #endif
 	while (t--)
 		solve();
-#ifdef TIME
+#ifdef WIN32
 	cerr << "\n\nTime elapsed: " << chrono::duration<double>(chrono::steady_clock::now() - TimeStart).count() << " seconds.\n";
 #endif
 	return 0;

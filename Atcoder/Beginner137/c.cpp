@@ -48,6 +48,19 @@ const int nax = 2e5 + 10;
 
 void solve()
 {
+	int n;
+	cin >> n;
+	string s;
+	ll ans = 0;
+	map<string, int> M;
+	while (n--)
+	{
+		cin >> s;
+		sort(s.begin(), s.end());
+		ans += M[s];
+		M[s]++;
+	}
+	cout << ans;
 }
 
 int main()
