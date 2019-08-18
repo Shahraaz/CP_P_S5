@@ -3,7 +3,7 @@
 using namespace std;
 
 // #define multitest 1
-#ifdef Debug
+#ifdef WIN32
 #define db(...) ZZ(#__VA_ARGS__, __VA_ARGS__);
 #define pc(...) PC(#__VA_ARGS__, __VA_ARGS__);
 template <typename T, typename U>
@@ -41,74 +41,20 @@ using ll = long long;
 #define f first
 #define s second
 #define pb push_back
-long long mod = 1000000007;
+const long long mod = 1000000007;
 auto TimeStart = chrono::steady_clock::now();
 
 const int nax = 2e5 + 10;
 
-ll pow(ll base, int index)
-{
-	if (index == 0)
-		return 1;
-	ll temp = pow(base, index / 2);
-	temp = (temp * temp) % mod;
-	if (index & 1)
-		temp = (temp * base) % mod;
-	return temp;
-}
-
-ll mul(ll a, ll b)
-{
-	return a * b % mod;
-}
-
-void gauss(vector<vector<ll>> a, vector<ll> &ans)
-{
-	int n = a.size();
-	int row, col;
-	row = col = 0;
-	vector<int> where(n, -1);
-	for (; col < n; ++col, ++row)
-	{
-		int sel = row;
-		for (int i = row + 1; i < n; ++i)
-			if (a[i][col] > a[sel][col])
-				sel = i;
-		for (int i = col; i <= n; ++i)
-			swap(a[sel][i], a[row][i]);
-		where[col] = row;
-		for (int i = 0; i < n; ++i)
-			if (i != row)
-			{
-				ll c = mul(a[i][col], pow(a[row][col], mod - 2));
-				for (int j = col; j <= n; ++j)
-					a[i][j] = (a[i][j] - a[row][j] * c % mod + mod) % mod;
-			}
-	}
-	for (int i = 0; i < n; ++i)
-		ans[i] = mul(a[where[i]][n], pow(a[where[i]][i], mod - 2));
-}
-
 void solve()
 {
-	int p;
-	cin >> p;
-	mod = p;
-	vector<vector<ll>> a(p, vector<ll>(p + 1));
-	for (int i = 0; i < p; ++i)
-	{
-		ll temp = 1;
-		for (int j = 0; j < p; ++j)
-		{
-			a[i][j] = temp;
-			temp = mul(temp, i);
-		}
-		cin >> a[i][p];
-	}
-	vector<ll> ans(p);
-	gauss(a, ans);
-	for (auto x : ans)
-		cout << x << ' ';
+	int a;
+	string s;
+	cin >> a >> s;
+	if (a < 3200)
+		cout << "red";
+	else
+		cout << s;
 }
 
 int main()
@@ -121,7 +67,7 @@ int main()
 #endif
 	while (t--)
 		solve();
-#ifdef TIME
+#ifdef WIN32
 	cerr << "\n\nTime elapsed: " << chrono::duration<double>(chrono::steady_clock::now() - TimeStart).count() << " seconds.\n";
 #endif
 	return 0;
