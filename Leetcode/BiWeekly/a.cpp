@@ -26,3 +26,20 @@ using ll = long long;
 const long long mod = 1000000007;
 
 const int nax = 2e5 + 10;
+class Solution
+{
+public:
+    int calculateTime(string keyboard, string word)
+    {
+        map<char, int> Ind;
+        for (int i = 0; i < 26; ++i)
+            Ind[keyboard[i]] = i;
+        int res = 0, prev = 0;
+        for (auto c : word)
+        {
+            res += abs(Ind[c] - prev);
+            prev = Ind[c];
+        }
+        return res;
+    }
+};

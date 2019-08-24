@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 #define Debug
 #ifdef Debug
@@ -26,3 +26,28 @@ using ll = long long;
 const long long mod = 1000000007;
 
 const int nax = 2e5 + 10;
+using ll = long long;
+class Solution
+{
+public:
+    long long connectSticks(vector<int> sticks)
+    {
+        multiset<int> S;
+        for (int i = 0; i < sticks.size(); ++i)
+            S.insert(sticks[i]);
+        ll ans = 0;
+        while (S.size() > 1)
+        {
+            auto it = S.begin();
+            ll temp1 = *it;
+            auto it2 = it;
+            ++it2;
+            ll temp2 = *it2;
+            S.erase(it);
+            S.erase(it2);
+            ans += (temp1 + temp2);
+            S.insert(temp1 + temp2);
+        }
+        return ans;
+    }
+};
