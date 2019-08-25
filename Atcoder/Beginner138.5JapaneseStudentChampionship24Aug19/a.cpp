@@ -59,6 +59,7 @@ void solve()
 			ans++;
 	}
 	cout << ans;
+	cerr << "Flush";
 }
 
 int main()
