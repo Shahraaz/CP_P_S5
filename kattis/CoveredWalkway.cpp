@@ -62,59 +62,84 @@ const int nax = 2e5 + 10;
 
 using ld = double;
 
-struct Bag
+struct Line
 {
-	int x;
-	ll prevCost;
-	Bag(int xx, ll pp) : x(xx), prevCost(pp) {}
-	ll getCost(ll y)
+	mutable long long k, m;
+	mutable function<const Line *()> succ;
+	bool operator<(const Line &o) const
 	{
-		return (x - y) * (x - y) + prevCost;
+		return k > o.k;
 	}
-	ld getCostutil(ld y)
+	bool operator<(const long long &_p) const
 	{
-		return (x - y) * (x - y) + prevCost;
+		const Line *s = succ();
+		if (s == nullptr)
+			return false;
+		return (m + k * _p) < (s->m + s->k * _p);
 	}
-	ld to(Bag rhs)
+};
+
+ostream &operator<<(ostream &out, const Line &p)
+{
+	out << "slope " << p.k << " constant " << p.m << ' ';
+	return out;
+}
+//Max Query
+
+struct lineContainer : multiset<Line, less<>>
+{
+	bool bad(iterator y)
 	{
-		ld low = rhs.x, high = rhs.x;
-		while (getCost(high) < rhs.getCost(high))
+		auto z = next(y);
+		if (y == begin())
 		{
-			/* code */
-			low = high + 1;
-			high *= 2;
+			if (z == end())
+				return false;
+			return y->k == z->k && y->m <= z->m;
 		}
-		int itr = 100;
-		while (low < high && --itr)
+		auto x = prev(y);
+		if (z == end())
+			return y->k == x->k && y->m <= x->m;
+		return 1.0L * (x->m - y->m) * (y->k - z->k) >= 1.0L * (y->k - x->k) * (z->m - y->m);
+	}
+	void add(long long k, long long m)
+	{
+		auto y = insert({k, m});
+		y->succ = [=] { return next(y) == end() ? nullptr : &*(next(y)); };
+		if (bad(y))
 		{
-			auto mid = (low + high) / 2;
-			if (getCostutil(mid) >= rhs.getCostutil(mid))
-				high = mid;
-			else
-				low = mid;
+			erase(y);
+			pc(*this);
+			return;
 		}
-		return high;
+		while (next(y) != end() && bad(next(y)))
+			erase(next(y));
+		while (y != begin() && bad(prev(y)))
+			erase(prev(y));
+		pc(*this);
+	}
+	long long query(long long x)
+	{
+		auto l = lower_bound(x);
+		db(x, *l, l->k * x + l->m);
+		return l->k * x + l->m;
 	}
 };
 
 void solve()
 {
-	int n, c, x;
+	ll n, c, x;
 	cin >> n >> c;
 	ll bestprev = 0;
-	vector<Bag> BigBag(n, Bag(0, 0));
-	int fptr, bptr;
-	fptr = bptr = 0;
+	lineContainer l;
 	for (int i = 0; i < n; ++i)
 	{
 		cin >> x;
-		Bag b(x, bestprev + c);
-		while (bptr - fptr >= 2 && BigBag[bptr - 2].to(BigBag[bptr - 1]) >= BigBag[bptr - 2].to(b))
-			--bptr;
-		BigBag[bptr++] = b;
-		while (fptr + 1 < bptr && BigBag[fptr].getCost(x) >= BigBag[fptr + 1].getCost(x))
-			++fptr;
-		bestprev = BigBag[fptr].getCost(x);
+		ll constant = c + bestprev + x * x;
+		ll slope = -2 * x;
+		l.add(-slope, -constant);
+		bestprev = -l.query(x) + x * x;
+		db(i, bestprev);
 	}
 	std::cout << bestprev << '\n';
 }

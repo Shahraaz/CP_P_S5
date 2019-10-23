@@ -62,68 +62,81 @@ const int nax = 2e5 + 10;
 
 struct Machine
 {
-	int day, price, resale, moneyPerDay;
+	ll day, price, resale, moneyPerDay;
 	Machine()
 	{
 		cin >> day >> price >> resale >> moneyPerDay;
 	}
 	bool operator<(const Machine &rhs) const
 	{
-		return moneyPerDay < rhs.moneyPerDay;
+		return day < rhs.day;
 	}
 };
 
-bool comp(const Machine &lhs, const Machine &rhs)
+bool Q;
+ll _p;
+struct Line
 {
-	return lhs.day < rhs.day;
-}
+	mutable long long k, m;
+	mutable function<const Line *()> succ;
+	bool operator<(const Line &o) const
+	{
+		if (!Q)
+			return k > o.k;
+		const Line *s = succ();
+		if (s == nullptr)
+			return false;
+		return (m + k * _p) < (s->m + s->k * _p);
+	}
+};
 
-ostream &operator<<(ostream &out, Machine &m)
+ostream &operator<<(ostream &out, const Line &p)
 {
-	out << m.day << ' ' << m.price << ' ' << m.resale << ' ' << m.moneyPerDay << ' ';
+	out << "slope " << p.k << " constant " << p.m << ' ';
 	return out;
 }
+//Max Query
 
-struct Sol
+struct lineContainer : multiset<Line>
 {
-	int start, moneyPerDay;
-	ll prevMoney;
-	Sol(int s, int m, ll p) : start(s), moneyPerDay(m), prevMoney(p) {}
-	ll moneyEarned(ll day) const
+	bool bad(iterator y)
 	{
-		ll delta = day - start;
-		return delta * moneyPerDay + prevMoney;
-	}
-	bool operator<(const Sol &rhs) const
-	{
-		return moneyPerDay < rhs.moneyPerDay;
-	}
-	ll to(Sol rhs) const // slope of this is
-	{
-		db("Bin Start Phase A");
-		ll lo = max(start, rhs.start);
-		if(start == rhs.start && moneyPerDay == rhs.moneyPerDay)
-			return lo;
-		ll high = 0;
-		high = lo;
-		int itr = 300;
-		while (moneyEarned(high) >= rhs.moneyEarned(high) && --itr)
+		auto z = next(y);
+		if (y == begin())
 		{
-			db(high, moneyEarned(high), rhs.moneyEarned(high));
-			lo = high;
-			high = 2 * high + 1;
+			if (z == end())
+				return false;
+			return y->k == z->k && y->m <= z->m;
 		}
-		db("Bin Start Phase B");
-		while (lo < high)
+		auto x = prev(y);
+		if (z == end())
+			return y->k == x->k && y->m <= x->m;
+		return 1.0L * (x->m - y->m) * (y->k - z->k) >= 1.0L * (y->k - x->k) * (z->m - y->m);
+	}
+	void add(long long k, long long m)
+	{
+		auto y = insert({k, m});
+		y->succ = [=] { return next(y) == end() ? nullptr : &*(next(y)); };
+		if (bad(y))
 		{
-			ll mid = (lo + high) / 2;
-			if (moneyEarned(mid) >= rhs.moneyEarned(mid))
-				lo = mid + 1;
-			else
-				high = mid;
+			erase(y);
+			pc(*this);
+			return;
 		}
-		db("Bin End");
-		return high;
+		while (next(y) != end() && bad(next(y)))
+			erase(next(y));
+		while (y != begin() && bad(prev(y)))
+			erase(prev(y));
+		pc(*this);
+	}
+	long long query(long long x)
+	{
+		Q = true;
+		_p = x;
+		auto l = lower_bound(Line({0, 0}));
+		Q = false;
+		db(x, *l, l->k * x + l->m);
+		return l->k * x + l->m;
 	}
 };
 
@@ -132,87 +145,24 @@ bool solve()
 {
 	int n, c, f;
 	cin >> n;
+	cin >> c >> f;
 	if (n == 0)
 		return false;
-	cin >> c >> f;
 	vector<Machine> machines(n);
-	sort(machines.begin(), machines.end(), comp);
+	sort(machines.begin(), machines.end());
 	ll maxMoney = c;
-	multiset<Sol> hull;
-	db("Before Loop over Machines");
-	for (auto m : machines)
+	lineContainer l;
+	l.add(0, 0);
+	for (auto machine : machines)
 	{
-		db("Before Loop A");
-		while (hull.size() >= 2)
-		{
-			auto fst = hull.begin();
-			auto snd = (++hull.begin());
-			// fst->moneyEarned
-			if (fst->moneyEarned(m.day - 1) > snd->moneyEarned(m.day - 1))
-				break;
-			hull.erase(hull.begin());
-		}
-		db("After Loop A");
-		if (hull.size() > 0)
-			maxMoney = max(maxMoney, hull.begin()->moneyEarned(m.day - 1));
-		if (m.price > maxMoney)
+		maxMoney = max(maxMoney, l.query(machine.day));
+		db(maxMoney);
+		if (maxMoney < machine.price)
 			continue;
-		ll prevMoney = maxMoney - m.price + m.resale;
-		Sol part(m.day, m.moneyPerDay, prevMoney);
-		auto same = hull.lower_bound(part);
-		if (same != hull.end() && same->moneyPerDay == part.moneyPerDay)
-		{
-			if (same->moneyEarned(m.day) >= part.moneyEarned(m.day))
-				continue;
-			hull.erase(same);
-		}
-		auto above = hull.lower_bound(part);
-		if (above != hull.end())
-			if (above != hull.begin())
-			{
-				auto below = --above;
-				if (below->to(part) >= below->to(*above))
-					continue;
-			}
-		db("Before Loop B");
-		while (true)
-		{
-			auto up1 = hull.upper_bound(part);
-			if (up1 == hull.end())
-				break;
-			auto up2 = ++up1;
-			if (up2 == hull.end())
-				break;
-			// Check invarient
-			ll t1 = part.to(*up1);
-			ll t2 = up1->to(*up2);
-			if (t1 < t2)
-				break;
-			hull.erase(up1);
-		}
-		db("After Loop B");
-		db("Before Loop C");
-		while (true)
-		{
-			auto low1 = hull.lower_bound(part);
-			if (low1 == hull.begin())
-				break;
-			low1--;
-			if (low1 == hull.begin())
-				break;
-			auto low2 = --low1;
-			ll t1 = low2->to(*low1);
-			ll t2 = low1->to(part);
-			if (t1 < t2)
-				break;
-			hull.erase(low1);
-		}
-		db("After Loop C");
-		hull.insert(part);
+		ll newRem = maxMoney - machine.price + machine.resale - machine.moneyPerDay * (machine.day + 1);
+		l.add(machine.moneyPerDay, newRem);
 	}
-	db("After Loop over Machines");
-	for (auto s : hull)
-		maxMoney = max(maxMoney, s.moneyEarned(f));
+	maxMoney = max(maxMoney, l.query(f + 1));
 	std::cout << "Case " << ++tc << ": " << maxMoney << '\n';
 	return true;
 }

@@ -59,65 +59,239 @@ auto TimeStart = chrono::steady_clock::now();
 
 const int nax = 2e5 + 10, mod = 1000000007;
 
+vector<pair<int, int>> vec;
+vector<ll> one(nax), two(nax);
+
+void solve(int start, int end, ll a, ll b)
+{
+	if (start == end)
+	{
+		vec.emplace_back((int)min((ll)mod, a), (int)min((ll)mod, b));
+		return;
+	}
+	solve(start + 1, end, a + one[start], b);
+	solve(start + 1, end, a, b + two[start]);
+	solve(start + 1, end, a + one[start], b + two[start]);
+}
+
+const bool Query = 0, Point = 1;
+
+struct Event
+{
+	int x, y;
+	bool type;
+	bool operator<(const Event &rhs) const
+	{
+		return make_pair(x, make_pair(y, type)) > make_pair(rhs.x, make_pair(rhs.y, rhs.type));
+	}
+};
+
+struct Node
+{
+	long long val;
+	Node(int one = 0) : val(one) {}
+	Node operator+(const Node &rhs)
+	{
+		Node a = *this;
+		a.val = a.val + rhs.val;
+		return a;
+	}
+};
+ostream &operator<<(ostream &out, const Node &p)
+{
+	out << p.val;
+	return out;
+}
+istream &operator>>(istream &in, Node &p)
+{
+	in >> p.val;
+	return in;
+}
+
+struct Segtree
+{
+	vector<Node> Seg, Lazy;
+	vector<Node> Base;
+	vector<bool> isLazy;
+	int n;
+	Segtree(int n = 2e5)
+	{
+		this->n = n;
+		Seg.resize(4 * n + 10);
+		Lazy.resize(4 * n + 10);
+		isLazy.resize(4 * n + 10);
+	}
+	void merge(Node &curr, Node &l, Node &r)
+	{
+		curr = l + r;
+	}
+	void propagate(int node, int L, int R)
+	{
+		if (isLazy[node])
+		{
+			isLazy[node] = false;
+			Seg[node] = Seg[node] + Lazy[node];
+			if (L != R)
+			{
+				Lazy[2 * node] = Lazy[2 * node] + Lazy[node];
+				Lazy[2 * node + 1] = Lazy[2 * node + 1] + Lazy[node];
+				isLazy[2 * node] = true;
+				isLazy[2 * node + 1] = true;
+			}
+			Lazy[node] = Node();
+		}
+	}
+	void build(int node, int start, int end)
+	{
+		if (start == end)
+		{
+			Seg[node] = Base[start];
+			return;
+		}
+		int mid = (start + end) / 2;
+		build(2 * node, start, mid);
+		build(2 * node + 1, mid + 1, end);
+		merge(Seg[node], Seg[2 * node], Seg[2 * node + 1]);
+	}
+	void build(vector<Node> &Arr)
+	{
+		Base = Arr;
+		n = Arr.size();
+		Seg.resize(4 * n + 10);
+		Lazy.resize(4 * n + 10);
+		isLazy.resize(4 * n + 10);
+		build(1, 0, n - 1);
+	}
+	Node Query(int node, int start, int end, int qstart, int qend)
+	{
+		propagate(node, start, end);
+		if (qend < start || qstart > end || start > end)
+			return Node();
+		if (qstart <= start && end <= qend)
+			return Seg[node];
+		int mid = (start + end) / 2;
+		Node l = Query(2 * node, start, mid, qstart, qend);
+		Node r = Query(2 * node + 1, mid + 1, end, qstart, qend);
+		Node ret;
+		merge(ret, l, r);
+		return ret;
+	}
+	Node qQuery(int node, int start, int end, int pos)
+	{
+		propagate(node, start, end);
+		if (start == end)
+			return Seg[node];
+		int mid = (start + end) / 2;
+		if (pos <= mid)
+			return qQuery(2 * node, start, mid, pos);
+		return qQuery(2 * node + 1, mid + 1, end, pos);
+	}
+	void Update(int node, int start, int end, int qstart, int qend, Node val)
+	{
+		propagate(node, start, end);
+		if (qend < start || qstart > end || start > end)
+			return;
+		if (qstart <= start && end <= qend)
+		{
+			isLazy[node] = true;
+			Lazy[node] = val;
+			propagate(node, start, end);
+			return;
+		}
+		int mid = (start + end) / 2;
+		Update(2 * node, start, mid, qstart, qend, val);
+		Update(2 * node + 1, mid + 1, end, qstart, qend, val);
+		merge(Seg[node], Seg[2 * node], Seg[2 * node + 1]);
+	}
+	void pUpdate(int node, int start, int end, int pos, Node val)
+	{
+		propagate(node, start, end);
+		if (start == end)
+		{
+			isLazy[node] = true;
+			// Seg[node] = Node();
+			Lazy[node] = val;
+			propagate(node, start, end);
+			return;
+		}
+		int mid = (start + end) / 2;
+		if (pos <= mid)
+			pUpdate(2 * node, start, mid, pos, val);
+		else
+			pUpdate(2 * node + 1, mid + 1, end, pos, val);
+		merge(Seg[node], Seg[2 * node], Seg[2 * node + 1]);
+	}
+	Node query(int pos)
+	{
+		return qQuery(1, 0, n - 1, pos);
+	}
+	Node query(int left, int right)
+	{
+		return Query(1, 0, n - 1, left, right);
+	}
+	void update(int pos, Node val)
+	{
+		pUpdate(1, 0, n - 1, pos, val);
+	}
+	void update(int start, int end, Node val)
+	{
+		Update(1, 0, n - 1, start, end, val);
+	}
+};
+
 void solve(int CaseNo)
 {
 	int n, h, x, y;
 	cin >> n >> h;
 	int mid = n / 2;
 	ll res = 0;
-	vector<ll> one(n), two(n);
 	for (int i = 0; i < n; ++i)
 		cin >> one[i];
 	for (int i = 0; i < n; ++i)
 		cin >> two[i];
-	// vector<ll> sumOne(1 << n), sumTwo(1 << n);
-	// sumOne[0] = sumTwo[0] = 0;
-	// for (int mask = 1; mask < (1 << n); ++mask)
-	// {
-	// 	int i;
-	// 	for (i = 0; i < n; ++i)
-	// 		if (mask & (1 << i))
-	// 			break;
-	// 	sumOne[mask] = sumOne[mask ^ (1 << i)] + one[i];
-	// 	sumTwo[mask] = sumTwo[mask ^ (1 << i)] + two[i];
-	// 	// db(mask, sumOne[mask], sumTwo[mask]);
-	// }
-	// // ll res = 0;
-	// for (int mask = 0; mask < (1 << n); ++mask)
-	// {
-	// 	int i;
-	// 	int maskt = (1 << n) - 1;
-	// 	db(mask, sumOne[mask], sumTwo[maskt ^ mask]);
-	// 	ll cntOne = sumOne[mask];
-	// 	if (cntOne < h)
-	// 		continue;
-	// 	int cntMask = 0;
-	// 	for (i = 0; i < n; ++i)
-	// 		if (mask & (1 << i))
-	// 			cntMask++;
-	// 	ll cntTwo = sumTwo[maskt ^ mask];
-	// 	if (cntTwo < h)
-	// 		continue;
-	// 	res += 1 << cntMask;
-	// }
-	vector<pair<ll, ll>> Score;
-	Score.pb({one[0], 0});
-	Score.pb({0, two[0]});
-	Score.pb({one[0], two[0]});
-	for (int i = 1; i < n; ++i)
+	vec.clear();
+	solve(0, mid, 0, 0);
+	auto l = vec;
+	vec.clear();
+	solve(mid, n, 0, 0);
+	auto r = vec;
+	vector<Event> events;
+	vector<int> values;
+	for (auto p : l)
 	{
-		vector<pair<ll, ll>> temp;
-		for (auto elem : Score)
-		{
-			temp.pb({one[i] + elem.f, elem.s});
-			temp.pb({one[i] + elem.f, two[i] + elem.s});
-			temp.pb({elem.f, two[i] + elem.s});
-		}
-		swap(temp, Score);
+		int x = max(0, h - p.f);
+		int y = max(0, h - p.s);
+		events.pb(Event{x, y, Query});
+		values.pb(x);
+		values.pb(y);
 	}
-	for (auto elem : Score)
-		if (elem.f >= h && elem.s >= h)
-			res++;
+	for (auto p : r)
+	{
+		events.pb(Event{p.f, p.s, Point});
+		values.pb(p.f);
+		values.pb(p.s);
+	}
+	sort(values.begin(), values.end());
+	values.resize(unique(values.begin(), values.end()) - values.begin());
+	int maxx = values.size() + 1;
+	auto get = [&](int x) {
+		return lower_bound(values.begin(), values.end(), x) - values.begin();
+	};
+	for (auto &e : events)
+	{
+		e.x = get(e.x);
+		e.y = get(e.y);
+	}
+	sort(events.begin(), events.end());
+	Segtree S(maxx);
+	for (auto &e : events)
+	{
+		int y = e.y;
+		if (e.type == Query)
+			res += S.query(y, maxx).val;
+		else
+			S.update(y, 1);
+	}
 	cout << "Case #" << CaseNo << ": " << res << '\n';
 }
 

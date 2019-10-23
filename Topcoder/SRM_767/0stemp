@@ -2,8 +2,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// #define multitest 1
-// #define Debug
+#define Debug
 #ifdef Debug
 #define db(...) ZZ(#__VA_ARGS__, __VA_ARGS__);
 #define pc(...) PC(#__VA_ARGS__, __VA_ARGS__);
