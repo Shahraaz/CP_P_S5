@@ -58,9 +58,43 @@ using ll = long long;
 auto TimeStart = chrono::steady_clock::now();
 
 const int nax = 2e5 + 10, mod = 1000000007;
+vector<int> G[nax];
+int res, k, vis[nax];
+vector<int> a(nax);
+
+int dfs(int node)
+{
+	int steps = 0;
+	for (auto child : G[node])
+		steps = max(steps, dfs(child) + 1);
+	if (steps == k - 1 && a[node] != 0)
+	{
+		a[node] = 0;
+		steps = -1;
+		res++;
+	}
+	return steps;
+}
 
 void solve(int caseNo)
 {
+	int n, x;
+	cin >> n >> k;
+	res = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		cin >> a[i];
+		--a[i];
+	}
+	if (a[0] != 0)
+	{
+		res++;
+		a[0] = 0;
+	}
+	for (int i = 1; i < n; ++i)
+		G[a[i]].pb(i);
+	dfs(0);
+	cout << res << '\n';
 }
 
 int main()

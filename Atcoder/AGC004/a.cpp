@@ -61,6 +61,27 @@ const int nax = 2e5 + 10, mod = 1000000007;
 
 void solve(int caseNo)
 {
+	ll a, b, c;
+	cin >> a >> b >> c;
+	ll ret = LLONG_MAX, cnt = 0;
+	if (a & 1)
+	{
+		cnt++;
+		ret = min(ret, b * c);
+	}
+	if (b & 1)
+	{
+		cnt++;
+		ret = min(ret, a * c);
+	}
+	if (c & 1)
+	{
+		cnt++;
+		ret = min(ret, b * a);
+	}
+	if (cnt != 3)
+		ret = 0;
+	cout << ret << '\n';
 }
 
 int main()

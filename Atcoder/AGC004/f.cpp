@@ -61,6 +61,28 @@ const int nax = 2e5 + 10, mod = 1000000007;
 
 void solve(int caseNo)
 {
+	int n;
+	ll x;
+	cin >> n >> x;
+	vector<int> a(n);
+	ll ret = 0;
+	for (auto &x : a)
+	{
+		cin >> x;
+		ret += x;
+	}
+	auto b = a;
+	for (int cnt = 1; cnt < n; ++cnt)
+	{
+		ll temp = 0;
+		for (int i = 0; i < n; ++i)
+		{
+			b[i] = min(b[i], a[(i - cnt + n) % n]);
+			temp += b[i];
+		}
+		ret = min(ret, temp);
+	}
+	cout << ret << '\n';
 }
 
 int main()

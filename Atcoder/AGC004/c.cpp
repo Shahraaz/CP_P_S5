@@ -61,6 +61,44 @@ const int nax = 2e5 + 10, mod = 1000000007;
 
 void solve(int caseNo)
 {
+	int h, w;
+	cin >> h >> w;
+	vector<string> grid(h);
+	for (auto &x : grid)
+		cin >> x;
+	for (int i = 0; i < h; i++)
+	{
+		cout << "#";
+		if (i % 2 == 0)
+		{
+			for (int i = 1; i < (w - 1); i++)
+				cout << "#";
+			cout << ".\n";
+		}
+		else
+		{
+			for (int j = 1; j < (w - 1); j++)
+				cout << grid[i][j];
+			cout << ".\n";
+		}
+	}
+	cout << '\n';
+	for (int i = 0; i < h; i++)
+	{
+		cout << ".";
+		if (i % 2 == 1)
+		{
+			for (int i = 1; i < w; i++)
+				cout << "#";
+			cout << "\n";
+		}
+		else
+		{
+			for (int j = 1; j < (w - 1); j++)
+				cout << grid[i][j];
+			cout << "#\n";
+		}
+	}
 }
 
 int main()
