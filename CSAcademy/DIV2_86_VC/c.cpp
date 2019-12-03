@@ -66,6 +66,29 @@ const int NAX = 2e5 + 10, MOD = 1000000007;
 
 void solveCase(int caseNo)
 {
+    string s;
+    cin >> s;
+    int n = s.size();
+    int ans = 0;
+    for (int i = 0; i < n - 1; ++i)
+        if (s[i] == s[i + 1])
+        {
+            while (i + 1 < n && s[i] == s[i + 1] && s[i] != '*')
+            {
+                ++ans;
+                ++i;
+            }
+        }
+        else
+        {
+            if (i + 2 < n && s[i] == s[i + 2])
+            {
+                s[i + 2] = '*';
+                ans++;
+            }
+        }
+
+    cout << ans << '\n';
 }
 
 int main()

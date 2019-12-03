@@ -76,41 +76,75 @@ void solveCase(int caseNo)
     int h, q;
     cin >> h >> q;
     vector<pair<int, int>> holes(q);
+    bool ok = false;
     for (auto &x : holes)
-        cin >> x.f >> x.s;
-    sort(holes.begin(), holes.end(), cmp);
-    multiset<int> holeheight;
-    int drainRate = 0, prevLeakTime = -1;
-    using ld = long double;
-    ld time = 0;
-    for (int i = 0; i < q; ++i)
     {
-        if (h < holes[i].s)
-            continue;
-        if (holeheight.size() == 0)
+        cin >> x.f >> x.s;
+        ok |= (x.s == 0);
+    }
+    if (!ok)
+    {
+        cout << -1 << '\n';
+        return;
+    }
+    sort(holes.begin(), holes.end(), cmp);
+    priority_queue<int> Q;
+    using ld = long double;
+    ld H = h, it = 0;
+    ld T = holes[0].f;
+    while (H > 0 && it < q)
+    {
+        while (!Q.empty() && Q.top() >= H)
+            Q.pop();
+        if (Q.empty())
         {
-            prevLeakTime = holes[i].f;
-            drainRate = 1;
-            holeheight.insert(holes[i].s);
+            T = holes[it].f;
+            Q.push(holes[it].s);
+            ++it;
+            continue;
+        }
+        if (holes[it].f == T)
+        {
+            Q.push(holes[it].s);
+            ++it;
+            continue;
+        }
+        if (it == q)
+            break;
+        int highest = Q.top();
+        int sz = Q.size();
+        ld until = (ld)(H - highest) / sz;
+        ld dif = holes[it].f;
+        dif -= T;
+        if (until <= dif)
+        {
+            Q.pop();
+            H = highest;
+            T += until;
         }
         else
         {
-            auto it = --holeheight.end();
-            int prevHoleht = *it;
-            if (prevHoleht > holes[i].s)
-            {
-            }
-            else
-            {
-            }
+            T += dif;
+            H -= dif * sz;
+            Q.push(holes[it].s);
+            ++it;
         }
     }
-    if (drainRate)
-        time += ceil(1.0 * h / drainRate), h = 0;
-    if (h == 0)
-        cout << time << '\n';
-    else
-        cout << -1 << '\n';
+    while (!Q.empty() && H > 0)
+    {
+        int highest = Q.top();
+        if (highest >= H)
+            Q.pop();
+        else
+        {
+            int sz = Q.size();
+            ld until = (ld)(H - highest) / sz;
+            H = highest;
+            T += until;
+            Q.pop();
+        }
+    }
+    cout << fixed << setprecision(9) << T << '\n';
 }
 
 int main()
