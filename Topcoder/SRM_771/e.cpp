@@ -1,12 +1,9 @@
 //Optimise
 #include <bits/stdc++.h>
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
 using namespace std;
-using namespace __gnu_pbds;
 
-// #define MULTI_TEST
-#ifdef LOCAL
+#define Debug
+#ifdef Debug
 #define db(...) ZZ(#__VA_ARGS__, __VA_ARGS__);
 #define pc(...) PC(#__VA_ARGS__, __VA_ARGS__);
 template <typename T, typename U>
@@ -18,24 +15,10 @@ ostream &operator<<(ostream &out, const pair<T, U> &p)
 template <typename Arg>
 void PC(const char *name, Arg &&arg)
 {
-    while (*name == ',' || *name == ' ')
-        name++;
     std::cerr << name << " { ";
     for (const auto &v : arg)
         cerr << v << ' ';
     cerr << " }\n";
-}
-template <typename Arg1, typename... Args>
-void PC(const char *names, Arg1 &&arg1, Args &&... args)
-{
-    while (*names == ',' || *names == ' ')
-        names++;
-    const char *comma = strchr(names, ',');
-    std::cerr.write(names, comma - names) << " { ";
-    for (const auto &v : arg1)
-        cerr << v << ' ';
-    cerr << " }\n";
-    PC(comma, args...);
 }
 template <typename Arg1>
 void ZZ(const char *name, Arg1 &&arg1)
@@ -55,36 +38,73 @@ void ZZ(const char *names, Arg1 &&arg1, Args &&... args)
 #endif
 
 using ll = long long;
-template <typename T>
-using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 #define f first
 #define s second
 #define pb push_back
-auto TimeStart = chrono::steady_clock::now();
+const long long mod = 1000000007;
+auto seed = chrono::high_resolution_clock::now().time_since_epoch().count();
+std::mt19937 rng(seed);
+template <typename T>
+using Random = std::uniform_int_distribution<T>;
 
-const int NAX = 2e5 + 10, MOD = 1000000007;
+const int nax = 2e5 + 10;
 
-void solveCase(int caseNo)
+class TrianglePath
 {
-}
+public:
+    vector<int> construct(int N, int Xmax, int Ymax, vector<int> Xprefix, vector<int> Yprefix, int seed)
+    {
+        auto X = Xprefix;
+        auto Y = Yprefix;
+        auto state = seed;
+        while (X.size() < N)
+        {
+            state = (state * 1103515245LL + 12345) % (1 << 31);
+            auto xnew = state % (Xmax + 1);
+            state = (state * 1103515245LL + 12345) % (1 << 31);
+            auto ynew = state % (Ymax + 1);
+            if (ynew * Xmax <= (Xmax - xnew) * Ymax)
+                X.push_back(xnew), Y.push_back(ynew);
+        }
+        while (true)
+        {
+            vector<int> P;
+            P.pb(Random<int>{0, N - 1}(rng));
+            vector<bool> Used(N);
+            Used[P[0]] = true;
+            ll tot = 0;
+            for (int i = 1; i < N; ++i)
+            {
+                ll dist = 1e18;
+                int b = -1;
+                for (int j = 0; j < N; ++j)
+                    if (!Used[j])
+                    {
+                        ll a = ll(X[P[i - 1] - X[j]]) * (X[P[i - 1] - X[j]]) +
+                               ll(Y[P[i - 1] - Y[j]]) * (Y[P[i - 1] - Y[j]]);
+                        if (a < dist)
+                            dist = a, b = j;
+                    }
+                P.push_back(b);
+                Used[b] = true;
+                tot += dist;
+            }
+            if (tot < (ll)Xmax * Xmax + (ll)Ymax * Ymax)
+                return P;
+        }
+        return {};
+    }
+};
 
+#ifndef LOCAL
+//<%:testing-code%>
+#endif
+
+#ifdef LOCAL
 int main()
 {
-#ifndef LOCAL
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-#endif
-    int t = 1;
-#ifdef MULTI_TEST
-    cin >> t;
-#endif
-    for (int i = 1; i <= t; ++i)
-    {
-        solveCase(i);
-#ifdef TIME
-        cerr << "Case #" << i << ": Time " << chrono::duration<double>(chrono::steady_clock::now() - TimeStart).count() << " s.\n";
-        TimeStart = chrono::steady_clock::now();
-#endif
-    }
     return 0;
 }
+#endif
+
+//Powered by KawigiEdit 2.1.4 (beta) modified by pivanof!
