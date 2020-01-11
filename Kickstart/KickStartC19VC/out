@@ -1,0 +1,113 @@
+caseNo = 1
+i = 0, Sr = 2, Sc = 3, steps[i] = E
+"startEast" = startEast
+next = [2, 4]
+"stopEast" = stopEast
+"EndPos" = EndPos, Sr = 2, Sc = 4
+i = 1, Sr = 2, Sc = 4, steps[i] = E
+"startEast" = startEast
+next = [2, 5]
+"stopEast" = stopEast
+"EndPos" = EndPos, Sr = 2, Sc = 5
+i = 2, Sr = 2, Sc = 5, steps[i] = W
+"startWest" = startWest
+next = [2, 4]
+next = [2, 3]
+next = [2, 2]
+"stopWest" = stopWest
+"EndPos" = EndPos, Sr = 2, Sc = 2
+i = 3, Sr = 2, Sc = 2, steps[i] = N
+"startNorth" = startNorth
+next = [1, 2]
+"stopNorth" = stopNorth
+"EndPos" = EndPos, Sr = 1, Sc = 2
+i = 4, Sr = 1, Sc = 2, steps[i] = S
+"startSouth" = startSouth
+next = [2, 2]
+next = [3, 2]
+"stopSouth" = stopSouth
+"EndPos" = EndPos, Sr = 3, Sc = 2
+Case #1: Time 0.0036986 s.
+caseNo = 2
+i = 0, Sr = 1, Sc = 1, steps[i] = S
+"startSouth" = startSouth
+next = [2, 1]
+"stopSouth" = stopSouth
+"EndPos" = EndPos, Sr = 2, Sc = 1
+i = 1, Sr = 2, Sc = 1, steps[i] = E
+"startEast" = startEast
+next = [2, 2]
+"stopEast" = stopEast
+"EndPos" = EndPos, Sr = 2, Sc = 2
+i = 2, Sr = 2, Sc = 2, steps[i] = S
+"startSouth" = startSouth
+next = [3, 2]
+"stopSouth" = stopSouth
+"EndPos" = EndPos, Sr = 3, Sc = 2
+i = 3, Sr = 3, Sc = 2, steps[i] = E
+"startEast" = startEast
+next = [3, 3]
+"stopEast" = stopEast
+"EndPos" = EndPos, Sr = 3, Sc = 3
+Case #2: Time 0.00231346 s.
+caseNo = 3
+i = 0, Sr = 3, Sc = 4, steps[i] = N
+"startNorth" = startNorth
+next = [2, 4]
+"stopNorth" = stopNorth
+"EndPos" = EndPos, Sr = 2, Sc = 4
+i = 1, Sr = 2, Sc = 4, steps[i] = E
+"startEast" = startEast
+next = [2, 5]
+"stopEast" = stopEast
+"EndPos" = EndPos, Sr = 2, Sc = 5
+i = 2, Sr = 2, Sc = 5, steps[i] = E
+"startEast" = startEast
+next = [2, 6]
+"stopEast" = stopEast
+"EndPos" = EndPos, Sr = 2, Sc = 6
+i = 3, Sr = 2, Sc = 6, steps[i] = S
+"startSouth" = startSouth
+next = [3, 6]
+"stopSouth" = stopSouth
+"EndPos" = EndPos, Sr = 3, Sc = 6
+i = 4, Sr = 3, Sc = 6, steps[i] = S
+"startSouth" = startSouth
+next = [4, 6]
+"stopSouth" = stopSouth
+"EndPos" = EndPos, Sr = 4, Sc = 6
+i = 5, Sr = 4, Sc = 6, steps[i] = W
+"startWest" = startWest
+next = [4, 5]
+"stopWest" = stopWest
+"EndPos" = EndPos, Sr = 4, Sc = 5
+i = 6, Sr = 4, Sc = 5, steps[i] = W
+"startWest" = startWest
+next = [4, 4]
+"stopWest" = stopWest
+"EndPos" = EndPos, Sr = 4, Sc = 4
+i = 7, Sr = 4, Sc = 4, steps[i] = N
+"startNorth" = startNorth
+next = [3, 4]
+next = [2, 4]
+next = [1, 4]
+"stopNorth" = stopNorth
+"EndPos" = EndPos, Sr = 1, Sc = 4
+i = 8, Sr = 1, Sc = 4, steps[i] = E
+"startEast" = startEast
+next = [1, 5]
+"stopEast" = stopEast
+"EndPos" = EndPos, Sr = 1, Sc = 5
+i = 9, Sr = 1, Sc = 5, steps[i] = S
+"startSouth" = startSouth
+next = [2, 5]
+next = [3, 5]
+"stopSouth" = stopSouth
+"EndPos" = EndPos, Sr = 3, Sc = 5
+i = 10, Sr = 3, Sc = 5, steps[i] = E
+"startEast" = startEast
+next = [3, 6]
+next = [3, 7]
+"stopEast" = stopEast
+"EndPos" = EndPos, Sr = 3, Sc = 7
+Case #3: Time 0.00683595 s.
