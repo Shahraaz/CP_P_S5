@@ -5,7 +5,7 @@
 using namespace std;
 using namespace __gnu_pbds;
 
-#define MULTI_TEST
+// #define MULTI_TEST
 #ifdef LOCAL
 #define db(...) ZZ(#__VA_ARGS__, __VA_ARGS__);
 #define pc(...) PC(#__VA_ARGS__, __VA_ARGS__);
@@ -67,44 +67,63 @@ std::mt19937 rng(seed);
 template <typename T>
 using Random = std::uniform_int_distribution<T>;
 
-const int NAX = 3e2 + 5, MOD = 1000000007;
-int A[NAX][NAX];
-bool ok[NAX][NAX][NAX];
+const int NAX = 2e5 + 5, MOD = 1000000007;
+
+bool valid(int x, int y, int a, int b)
+{
+    return 0 <= x && x < a && 0 <= y && y < b;
+}
+int a[4] = {0, 0, 1, -1};
+int b[4] = {1, -1, 0, 0};
 
 void solveCase(int caseNo)
 {
-    int R, C, K;
-    cin >> R >> C >> K;
-    for (int i = 0; i < R; i++)
-        for (int j = 0; j < C; j++)
-            cin >> A[i][j];
-    for (int i = 0; i < R; i++)
-        for (int j = 0; j < C; j++)
+    int h, w;
+    cin >> h >> w;
+    vector<string> maze(h);
+    for (auto &elem : maze)
+        cin >> elem;
+    int res = 1;
+    // pc(maze);
+    for (int i = 0; i < h; i++)
+    {
+        for (int j = 0; j < w; j++)
         {
-            int cl = MOD, cr = -MOD;
-            for (int k = j; k < C; k++)
+            if (maze[i][j] == '#')
+                continue;
+            vector<vector<int>> dist(h, vector<int>(w, MOD));
+            vector<vector<bool>> vis(h, vector<bool>(w, 0));
+            queue<pair<int, int>> Q;
+            Q.push({i, j});
+            vis[i][j] = true;
+            dist[i][j] = 0;
+            while (!Q.empty())
             {
-                cl = min(cl, A[i][k]);
-                cr = max(cr, A[i][k]);
-                ok[i][j][k] = (cr - cl) <= K;
+                auto top = Q.front();
+                Q.pop();
+                db(i, j, top);
+                res = max(res, dist[top.f][top.s]);
+                for (int k = 0; k < 4; k++)
+                {
+                    int x = top.f + a[k];
+                    int y = top.s + b[k];
+                    if (valid(x, y, h, w) && maze[x][y] == '.')
+                    {
+                        if (dist[x][y] > dist[top.f][top.s] + 1)
+                        {
+                            dist[x][y] = dist[top.f][top.s] + 1;
+                            if (!vis[x][y])
+                            {
+                                vis[x][y] = true;
+                                Q.push({x, y});
+                            }
+                        }
+                    }
+                }
             }
         }
-    int ans = 0;
-    for (int i = 0; i < C; i++)
-        for (int j = 0; j < C; j++)
-        {
-            int cont = 0;
-            for (int k = 0; k < R; k++)
-            {
-                if (ok[k][i][j])
-                    ++cont;
-                else
-                    cont = 0;
-                ans = max(ans, cont * (j - i + 1));
-            }
-        }
-    cout << "Case #" << caseNo << ": ";
-    cout << ans << '\n';
+    }
+    cout << res << '\n';
 }
 
 int main()

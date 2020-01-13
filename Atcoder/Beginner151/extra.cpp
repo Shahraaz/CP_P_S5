@@ -5,7 +5,7 @@
 using namespace std;
 using namespace __gnu_pbds;
 
-#define MULTI_TEST
+// #define MULTI_TEST
 #ifdef LOCAL
 #define db(...) ZZ(#__VA_ARGS__, __VA_ARGS__);
 #define pc(...) PC(#__VA_ARGS__, __VA_ARGS__);
@@ -60,51 +60,17 @@ using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statisti
 #define f first
 #define s second
 #define pb push_back
-#define all(v) v.begin(), v.end()
+#define all(v) v.begin(),v.end()
 auto TimeStart = chrono::steady_clock::now();
 auto seed = TimeStart.time_since_epoch().count();
 std::mt19937 rng(seed);
 template <typename T>
 using Random = std::uniform_int_distribution<T>;
 
-const int NAX = 3e2 + 5, MOD = 1000000007;
-int A[NAX][NAX];
-bool ok[NAX][NAX][NAX];
+const int NAX = 2e5 + 5, MOD = 1000000007;
 
 void solveCase(int caseNo)
 {
-    int R, C, K;
-    cin >> R >> C >> K;
-    for (int i = 0; i < R; i++)
-        for (int j = 0; j < C; j++)
-            cin >> A[i][j];
-    for (int i = 0; i < R; i++)
-        for (int j = 0; j < C; j++)
-        {
-            int cl = MOD, cr = -MOD;
-            for (int k = j; k < C; k++)
-            {
-                cl = min(cl, A[i][k]);
-                cr = max(cr, A[i][k]);
-                ok[i][j][k] = (cr - cl) <= K;
-            }
-        }
-    int ans = 0;
-    for (int i = 0; i < C; i++)
-        for (int j = 0; j < C; j++)
-        {
-            int cont = 0;
-            for (int k = 0; k < R; k++)
-            {
-                if (ok[k][i][j])
-                    ++cont;
-                else
-                    cont = 0;
-                ans = max(ans, cont * (j - i + 1));
-            }
-        }
-    cout << "Case #" << caseNo << ": ";
-    cout << ans << '\n';
 }
 
 int main()

@@ -5,7 +5,7 @@
 using namespace std;
 using namespace __gnu_pbds;
 
-#define MULTI_TEST
+// #define MULTI_TEST
 #ifdef LOCAL
 #define db(...) ZZ(#__VA_ARGS__, __VA_ARGS__);
 #define pc(...) PC(#__VA_ARGS__, __VA_ARGS__);
@@ -67,44 +67,47 @@ std::mt19937 rng(seed);
 template <typename T>
 using Random = std::uniform_int_distribution<T>;
 
-const int NAX = 3e2 + 5, MOD = 1000000007;
-int A[NAX][NAX];
-bool ok[NAX][NAX][NAX];
+const int NAX = 2e5 + 5, MOD = 1000000007;
+
+using ld = long double;
+ld dist(ld a, ld b)
+{
+    return a * a + b * b;
+}
+ld x[51], y[51];
+ld X, Y, d;
 
 void solveCase(int caseNo)
 {
-    int R, C, K;
-    cin >> R >> C >> K;
-    for (int i = 0; i < R; i++)
-        for (int j = 0; j < C; j++)
-            cin >> A[i][j];
-    for (int i = 0; i < R; i++)
-        for (int j = 0; j < C; j++)
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        cin >> x[i] >> y[i];
+        X += x[i], Y += y[i];
+    }
+    X /= n;
+    Y /= n;
+    ld p = 0.01;
+    for (int i = 0; i < 300000; i++)
+    {
+        int f = 0;
+        d = dist(X - x[0], Y - y[0]);
+        for (int j = 1; j < n; j++)
         {
-            int cl = MOD, cr = -MOD;
-            for (int k = j; k < C; k++)
+            ld e = dist(X - x[j], Y - y[j]);
+            if (d < e)
             {
-                cl = min(cl, A[i][k]);
-                cr = max(cr, A[i][k]);
-                ok[i][j][k] = (cr - cl) <= K;
+                d = e;
+                f = j;
             }
         }
-    int ans = 0;
-    for (int i = 0; i < C; i++)
-        for (int j = 0; j < C; j++)
-        {
-            int cont = 0;
-            for (int k = 0; k < R; k++)
-            {
-                if (ok[k][i][j])
-                    ++cont;
-                else
-                    cont = 0;
-                ans = max(ans, cont * (j - i + 1));
-            }
-        }
-    cout << "Case #" << caseNo << ": ";
-    cout << ans << '\n';
+        X += (x[f] - X) * p;
+        Y += (y[f] - Y) * p;
+        p *= 0.999;
+    }
+    cout << fixed << setprecision(15);
+    cout << sqrtl(d) << '\n';
 }
 
 int main()

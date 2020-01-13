@@ -5,7 +5,7 @@
 using namespace std;
 using namespace __gnu_pbds;
 
-#define MULTI_TEST
+// #define MULTI_TEST
 #ifdef LOCAL
 #define db(...) ZZ(#__VA_ARGS__, __VA_ARGS__);
 #define pc(...) PC(#__VA_ARGS__, __VA_ARGS__);
@@ -67,44 +67,108 @@ std::mt19937 rng(seed);
 template <typename T>
 using Random = std::uniform_int_distribution<T>;
 
-const int NAX = 3e2 + 5, MOD = 1000000007;
-int A[NAX][NAX];
-bool ok[NAX][NAX][NAX];
+const int NAX = 2e5 + 5, MOD = 1000000007;
+
+int _n = 1e5 + 10;
+vector<int> Fact(_n), Inv(_n);
+const int kmod = 1000000007;
+
+int mul(int a, int b, int mod = kmod)
+{
+    return (long long)a * b % mod;
+}
+
+int power(int base, int index, int mod = kmod)
+{
+    if (index == 0)
+        return 1;
+    int temp = power(base, index / 2, mod);
+    temp = mul(temp, temp, mod);
+    if (index & 1)
+        temp = mul(temp, base, mod);
+    return temp;
+}
+
+void pre()
+{
+    Fact[0] = 1;
+    for (int i = 1; i < _n; ++i)
+        Fact[i] = mul(Fact[i - 1], i);
+    Inv[_n - 1] = power(Fact[_n - 1], kmod - 2);
+    for (int i = _n - 2; i >= 0; --i)
+        Inv[i] = mul(Inv[i + 1], (1 + i));
+}
+
+int ncr(int n, int r)
+{
+    if (n < 0 || r < 0 || n - r < 0)
+        return 0;
+    return mul(Fact[n], mul(Inv[r], Inv[n - r]));
+}
+
+int add(int a, int b)
+{
+    a += b;
+    if (a >= kmod)
+        a -= kmod;
+    return a;
+}
+
+int sub(int a, int b)
+{
+    a -= b;
+    if (a < 0)
+        a += kmod;
+    return a;
+}
 
 void solveCase(int caseNo)
 {
-    int R, C, K;
-    cin >> R >> C >> K;
-    for (int i = 0; i < R; i++)
-        for (int j = 0; j < C; j++)
-            cin >> A[i][j];
-    for (int i = 0; i < R; i++)
-        for (int j = 0; j < C; j++)
+    pre();
+    int n, k;
+    cin >> n >> k;
+    vector<int> vect(n);
+    for (auto &elem : vect)
+        cin >> elem;
+    sort(all(vect));
+    for (auto &elem : vect)
+    {
+        if (elem < 0)
+            elem += kmod;
+    }
+    if (k == 1)
+    {
+        cout << 0 << '\n';
+        return;
+    }
+    int res = 0;
+    vector<int> curr(n + 1);
+    curr[0] = ncr(0, k - 2);
+    for (int i = 1; i < curr.size(); i++)
+    {
+        curr[i] = add(ncr(i, k - 2), curr[i - 1]);
+        db(i, curr[i]);
+    }
+    pc(curr);
+    pc(vect);
+    for (int i = 0; i < vect.size(); i++)
+    {
+        db(i);
+        int lessCnt = i, moreCnt = n - i - 1;
+        if (lessCnt >= k - 1)
         {
-            int cl = MOD, cr = -MOD;
-            for (int k = j; k < C; k++)
-            {
-                cl = min(cl, A[i][k]);
-                cr = max(cr, A[i][k]);
-                ok[i][j][k] = (cr - cl) <= K;
-            }
+            int temp = sub(curr[i - 1], 0);
+            db("add", i - 1, 0, temp);
+            res = add(res, mul(vect[i], temp));
         }
-    int ans = 0;
-    for (int i = 0; i < C; i++)
-        for (int j = 0; j < C; j++)
+        if (moreCnt >= k - 1)
         {
-            int cont = 0;
-            for (int k = 0; k < R; k++)
-            {
-                if (ok[k][i][j])
-                    ++cont;
-                else
-                    cont = 0;
-                ans = max(ans, cont * (j - i + 1));
-            }
+            int temp = sub(curr[n - i - 2], 0);
+            db("sub", n - i - 2, 0, temp);
+            res = sub(res, mul(vect[i], temp));
         }
-    cout << "Case #" << caseNo << ": ";
-    cout << ans << '\n';
+    }
+    cout << res << '\n';
 }
 
 int main()
