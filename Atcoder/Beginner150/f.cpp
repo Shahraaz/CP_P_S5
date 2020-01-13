@@ -60,7 +60,7 @@ using ordered_set = tree<T, null_type, less<T>, rb_tree_tag, tree_order_statisti
 #define f first
 #define s second
 #define pb push_back
-#define all(v) v.begin(),v.end()
+#define all(v) v.begin(), v.end()
 auto TimeStart = chrono::steady_clock::now();
 auto seed = TimeStart.time_since_epoch().count();
 std::mt19937 rng(seed);
@@ -69,8 +69,46 @@ using Random = std::uniform_int_distribution<T>;
 
 const int NAX = 2e5 + 5, MOD = 1000000007;
 
+vector<int> Z_function(vector<int> S)
+{
+    int n = S.size();
+    vector<int> z(n);
+    int l = -1, r = -1;
+    for (int i = 1; i < n; ++i)
+    {
+        if (i <= r)
+            z[i] = min(r - i, z[i - l]);
+        while (i + z[i] < n && S[z[i]] == S[i + z[i]])
+            ++z[i];
+        if (i + z[i] - 1 > r)
+            l = i, r = i + z[i];
+    }
+    return z;
+}
+
 void solveCase(int caseNo)
 {
+    int n;
+    cin >> n;
+    vector<int> a(n), b(n);
+    for (auto &x : a)
+    {
+        cin >> x;
+    }
+    for (auto &x : b)
+    {
+        cin >> x;
+    }
+    vector<int> xx(3 * n + 1);
+    for (int i = 0; i < n; i++)
+        xx[i] = b[i] ^ b[(i + 1) % n];
+    xx[n] = -1;
+    for (int i = 0; i < 2 * n; i++)
+        xx[i + n + 1] = a[i % n] ^ a[(i + 1) % n];
+    auto z = Z_function(xx);
+    for (int i = 0; i < n; i++)
+        if (z[n + 1 + i] >= n - 1)
+            cout << i << ' ' << (a[i] ^ b[0]) << '\n';
 }
 
 int main()
