@@ -1,0 +1,287 @@
+low = 0, high = 1e+09, mid = 5eTime: 0.003869 seconds
+Desired answer:
+	184.01
+Your answer:
+	0
+DOESN'T MATCH!!!!
+
+Test 1: [11,{5,16,17,-3,-10,20,20,14,2,0},1337]
+Time: 0.003927 seconds
+Desired answer:
+	874.77
+Your answer:
+	0
+DOESN'T MATCH!!!!
+
+Test 2: [2,{0},42]
+Time: 0.003807 seconds
+Desired answer:
+	42
+Your answer:
+	0
+DOESN'T MATCH!!!!
+
+Test 3: [20,{30,-26,87,47,-39,25,-67,62,-38,68,-84,5,28,-20,50,-61,10,63,-71},392]
+Time: 0.004256 seconds
+Desired answer:
+	476.28
+Your answer:
+	0
+DOESN'T MATCH!!!!
+
+Test 4: [50,{-60,61,17,86,56,27,9,41,-27,-36,57,-16,1,50,-55,-36,14,13,-93,14,18,25,62,-18,40,79,56,19,10,-55,-43,45,-43,-84,61,-64,41,-55,38,18,36,-43,79,33,87,19,-47,38,-56},8887]
+Time: 0.003696 seconds
+Desired answer:
+	9451.93
+Your answer:
+	0
+DOESN'T MATCH!!!!
+
+Some of the test cases had errors.
+7.5
+mid = 30517
+low = 0, high = 30517, mid = 15258.5
+mid = 15258
+low = 0, high = 15258, mid = 7629
+mid = 7629
+low = 0, high = 7629, mid = 3814.5
+mid = 3814
+low = 0, high = 3814, mid = 1907
+mid = 1907
+low = 0, high = 1907, mid = 953.5
+mid = 953
+low = 0, high = 953, mid = 476.5
+mid = 476
+low = 0, high = 476, mid = 238
+mid = 238
+low = 0, high = 238, mid = 119
+mid = 119
+low = 119, high = 238, mid = 178.5
+mid = 178
+low = 178, high = 238, mid = 208
+mid = 208
+low = 178, high = 208, mid = 193
+mid = 193
+low = 178, high = 193, mid = 185.5
+mid = 185
+low = 185, high = 193
+low = 0, high = 1e+09, mid = 5e+08
+mid = 5e+08
+low = 0, high = 5e+08, mid = 2.5e+08
+mid = 2.5e+08
+low = 0, high = 2.5e+08, mid = 1.25e+08
+mid = 1.25e+08
+low = 0, high = 1.25e+08, mid = 6.25e+07
+mid = 6.25e+07
+low = 0, high = 6.25e+07, mid = 3.125e+07
+mid = 3.125e+07
+low = 0, high = 3.125e+07, mid = 1.5625e+07
+mid = 1.5625e+07
+low = 0, high = 1.5625e+07, mid = 7.8125e+06
+mid = 7.8125e+06
+low = 0, high = 7.8125e+06, mid = 3.90625e+06
+mid = 3.90625e+06
+low = 0, high = 3.90625e+06, mid = 1.95312e+06
+mid = 1.95312e+06
+low = 0, high = 1.95312e+06, mid = 976562
+mid = 976562
+low = 0, high = 976562, mid = 488281
+mid = 488281
+low = 0, high = 488281, mid = 244140
+mid = 244140
+low = 0, high = 244140, mid = 122070
+mid = 122070
+low = 0, high = 122070, mid = 61035
+mid = 61035
+low = 0, high = 61035, mid = 30517.5
+mid = 30517
+low = 0, high = 30517, mid = 15258.5
+mid = 15258
+low = 0, high = 15258, mid = 7629
+mid = 7629
+low = 0, high = 7629, mid = 3814.5
+mid = 3814
+low = 0, high = 3814, mid = 1907
+mid = 1907
+low = 0, high = 1907, mid = 953.5
+mid = 953
+low = 0, high = 953, mid = 476.5
+mid = 476
+low = 476, high = 953, mid = 714.5
+mid = 714
+low = 714, high = 953, mid = 833.5
+mid = 833
+low = 833, high = 953, mid = 893
+mid = 893
+low = 833, high = 893, mid = 863
+mid = 863
+low = 863, high = 893, mid = 878
+mid = 878
+low = 863, high = 878, mid = 870.5
+mid = 870
+low = 870, high = 878
+low = 0, high = 1e+09, mid = 5e+08
+mid = 5e+08
+low = 0, high = 5e+08, mid = 2.5e+08
+mid = 2.5e+08
+low = 0, high = 2.5e+08, mid = 1.25e+08
+mid = 1.25e+08
+low = 0, high = 1.25e+08, mid = 6.25e+07
+mid = 6.25e+07
+low = 0, high = 6.25e+07, mid = 3.125e+07
+mid = 3.125e+07
+low = 0, high = 3.125e+07, mid = 1.5625e+07
+mid = 1.5625e+07
+low = 0, high = 1.5625e+07, mid = 7.8125e+06
+mid = 7.8125e+06
+low = 0, high = 7.8125e+06, mid = 3.90625e+06
+mid = 3.90625e+06
+low = 0, high = 3.90625e+06, mid = 1.95312e+06
+mid = 1.95312e+06
+low = 0, high = 1.95312e+06, mid = 976562
+mid = 976562
+low = 0, high = 976562, mid = 488281
+mid = 488281
+low = 0, high = 488281, mid = 244140
+mid = 244140
+low = 0, high = 244140, mid = 122070
+mid = 122070
+low = 0, high = 122070, mid = 61035
+mid = 61035
+low = 0, high = 61035, mid = 30517.5
+mid = 30517
+low = 0, high = 30517, mid = 15258.5
+mid = 15258
+low = 0, high = 15258, mid = 7629
+mid = 7629
+low = 0, high = 7629, mid = 3814.5
+mid = 3814
+low = 0, high = 3814, mid = 1907
+mid = 1907
+low = 0, high = 1907, mid = 953.5
+mid = 953
+low = 0, high = 953, mid = 476.5
+mid = 476
+low = 0, high = 476, mid = 238
+mid = 238
+low = 0, high = 238, mid = 119
+mid = 119
+low = 0, high = 119, mid = 59.5
+mid = 59
+low = 0, high = 59, mid = 29.5
+mid = 29
+low = 29, high = 59, mid = 44
+mid = 44
+low = 29, high = 44, mid = 36.5
+mid = 36
+low = 36, high = 44
+low = 0, high = 1e+09, mid = 5e+08
+mid = 5e+08
+low = 0, high = 5e+08, mid = 2.5e+08
+mid = 2.5e+08
+low = 0, high = 2.5e+08, mid = 1.25e+08
+mid = 1.25e+08
+low = 0, high = 1.25e+08, mid = 6.25e+07
+mid = 6.25e+07
+low = 0, high = 6.25e+07, mid = 3.125e+07
+mid = 3.125e+07
+low = 0, high = 3.125e+07, mid = 1.5625e+07
+mid = 1.5625e+07
+low = 0, high = 1.5625e+07, mid = 7.8125e+06
+mid = 7.8125e+06
+low = 0, high = 7.8125e+06, mid = 3.90625e+06
+mid = 3.90625e+06
+low = 0, high = 3.90625e+06, mid = 1.95312e+06
+mid = 1.95312e+06
+low = 0, high = 1.95312e+06, mid = 976562
+mid = 976562
+low = 0, high = 976562, mid = 488281
+mid = 488281
+low = 0, high = 488281, mid = 244140
+mid = 244140
+low = 0, high = 244140, mid = 122070
+mid = 122070
+low = 0, high = 122070, mid = 61035
+mid = 61035
+low = 0, high = 61035, mid = 30517.5
+mid = 30517
+low = 0, high = 30517, mid = 15258.5
+mid = 15258
+low = 0, high = 15258, mid = 7629
+mid = 7629
+low = 0, high = 7629, mid = 3814.5
+mid = 3814
+low = 0, high = 3814, mid = 1907
+mid = 1907
+low = 0, high = 1907, mid = 953.5
+mid = 953
+low = 0, high = 953, mid = 476.5
+mid = 476
+low = 476, high = 953, mid = 714.5
+mid = 714
+low = 476, high = 714, mid = 595
+mid = 595
+low = 476, high = 595, mid = 535.5
+mid = 535
+low = 476, high = 535, mid = 505.5
+mid = 505
+low = 476, high = 505, mid = 490.5
+mid = 490
+low = 476, high = 490, mid = 483
+mid = 483
+low = 476, high = 483
+low = 0, high = 1e+09, mid = 5e+08
+mid = 5e+08
+low = 0, high = 5e+08, mid = 2.5e+08
+mid = 2.5e+08
+low = 0, high = 2.5e+08, mid = 1.25e+08
+mid = 1.25e+08
+low = 0, high = 1.25e+08, mid = 6.25e+07
+mid = 6.25e+07
+low = 0, high = 6.25e+07, mid = 3.125e+07
+mid = 3.125e+07
+low = 0, high = 3.125e+07, mid = 1.5625e+07
+mid = 1.5625e+07
+low = 0, high = 1.5625e+07, mid = 7.8125e+06
+mid = 7.8125e+06
+low = 0, high = 7.8125e+06, mid = 3.90625e+06
+mid = 3.90625e+06
+low = 0, high = 3.90625e+06, mid = 1.95312e+06
+mid = 1.95312e+06
+low = 0, high = 1.95312e+06, mid = 976562
+mid = 976562
+low = 0, high = 976562, mid = 488281
+mid = 488281
+low = 0, high = 488281, mid = 244140
+mid = 244140
+low = 0, high = 244140, mid = 122070
+mid = 122070
+low = 0, high = 122070, mid = 61035
+mid = 61035
+low = 0, high = 61035, mid = 30517.5
+mid = 30517
+low = 0, high = 30517, mid = 15258.5
+mid = 15258
+low = 0, high = 15258, mid = 7629
+mid = 7629
+low = 7629, high = 15258, mid = 11443.5
+mid = 11443
+low = 7629, high = 11443, mid = 9536
+mid = 9536
+low = 7629, high = 9536, mid = 8582.5
+mid = 8582
+low = 8582, high = 9536, mid = 9059
+mid = 9059
+low = 9059, high = 9536, mid = 9297.5
+mid = 9297
+low = 9297, high = 9536, mid = 9416.5
+mid = 9416
+low = 9416, high = 9536, mid = 9476
+mid = 9476
+low = 9416, high = 9476, mid = 9446
+mid = 9446
+low = 9446, high = 9476, mid = 9461
+mid = 9461
+low = 9446, high = 9461, mid = 9453.5
+mid = 9453
+low = 9453, high = 9461
