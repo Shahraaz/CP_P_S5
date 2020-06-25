@@ -1,0 +1,108 @@
+Convert to Valid id
+
+You are given an id represented as a string S which consists only uppercase character and dashes. The string is separated into N+1 groups by N dashes.
+
+Given a number K, we would want to reformat the strings such that each group contains exactly K characters, except for the first group which could be shorter than K, but still must contain at least one character. Furthermore, there must be a dash inserted between two groups.
+
+Given a non-empty string S and a number K, format the string according to the rules described above.
+
+Examples:
+Input: S = "5F3Z-2E-9-W", K = 4
+
+Output: "5F3Z-2E9W"
+
+Explanation: The string S has been split into two parts, each part has 4 characters.
+Note that the two extra dashes are not needed and can be removed.
+
+Input: S = "2-5G-3-J", K = 2
+
+Output: "2-5G-3J"
+
+Explanation: The string S has been split into three parts, each part has 2 characters except the first part as it could be shorter as mentioned above.
+
+Recommended: Please try your approach on {IDE} first, before moving on to the solution.
+
+Approach: The idea is to create a new string from the given string and divide into groups. Below are the steps:
+
+1.Initialise the new string newStr = “”.
+
+2.Iterate through all the characters of the given string and remove dashes.
+
+3.if newStr size is zero return newStr
+
+4 set ret to "" (empty string)
+
+5. Check if there is any remainder after dividing string size by K
+5a. If yes make ret = S.substr(0, first) (append first letters to ret) and then remove first letters from S 
+5b. else yes make ret = S.substr(0, K) (append K letters to ret) and then remove K letters from S 
+
+6 Keep a counter and a pointer iterate pointer from 0 to len(S) and counter from 0 to K-1
+7 if ctr is a multiple of K of appent - to ret and keep appending charecters of separated
+
+
+Below is the implementation of the above approach:
+
+// C++ program for the above approach 
+#include <bits/stdc++.h>
+using namespace std;
+
+
+    string converttoValidid(string S, int K)
+    {
+        string res = "";
+        // Remove dashes
+        for (auto &c : S)
+        {
+            if (c == '-')
+                continue;
+            res += c;
+        }
+        //check if empty and return
+        if(res.size() == 0)
+            return res;
+        S = res;
+        string ret = "";
+        int first = S.length() % K;
+        if (first > 0)
+        {
+         //If yes make ret = S.substr(0, first) (append first letters to ret) and then remove first letters from S 
+   
+            ret += S.substr(0, first);
+            S = S.substr(first);
+        }
+        else
+        {
+//else yes make ret = S.substr(0, K) (append K letters to ret) and then remove K letters from S 
+            ret += S.substr(0, K);
+            S = S.substr(K);
+        }
+        // set pointers to 0
+        int fptr = 0, ctr = 0;
+        while (fptr < S.length())
+        {
+            // if ctr is multiple of K append dash
+            if (ctr == 0)
+                ret += '-';
+            //keep appending charecters of S
+            ret += S[fptr];
+            //Increment pointers
+            ctr = (ctr + 1) % K;
+            fptr++;
+        }
+        return ret;
+    }
+
+// Driver Code 
+int main()
+{
+        cout << converttoValidid("5F3Z-2E-9-W", 4) << '\n';
+        cout << converttoValidid("2-5G-3-J", 2) << '\n';
+}
+
+Output:
+5F3Z-2E9W
+2-5G-3J
+
+Time Complexity: O(N), where N is length of the string.
+
+Got what you were looking for? Learn more and become self sufficient. Start learning Data Sructures & Algorithms with the help of the most trusted DSA Self Paced course, and that too at the most student-friendly price.
