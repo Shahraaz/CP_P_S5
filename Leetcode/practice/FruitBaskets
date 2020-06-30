@@ -1,0 +1,103 @@
+Catch Em all
+
+In a row of pokemons, the i-th location has one pokemon of with type pokemon[i].
+
+You start at any pokemon of your choice, then repeatedly perform the following steps:
+
+Catch one Pokemon and store in your bag. If you cannot, stop.
+Move to next Pokemon of the current pokemon. If there is no pokemon to the right, stop.
+
+Note that you do not have any choice after the initial choice of starting pokemon: you must perform step 1, then step 2, then back to step 1, then step 2, and so on until you stop.
+
+You can grow food for only 2 breeds of pokemons in your graden.So you can have atmost 2 breeds of pokemon.
+
+What is the max number of pokemon you can collect with this procedure?
+
+Examples:
+Input: [1,2,1]
+Output: 3
+Explanation: We can collect [1,2,1].
+
+Input: [0,1,2,2]
+Output: 3
+Explanation: We can collect [1,2,2].
+If we started at the first tree, we would only collect [0, 1].
+
+Input: [1,2,3,2,2]
+Output: 4
+Explanation: We can collect [2,3,2,2].
+If we started at the first tree, we would only collect [1, 2].
+
+Recommended: Please try your approach on {IDE} first, before moving on to the solution.
+
+Approach: The idea is to create a map of count of pokemon you alredy have and using sliding window to find best solution. Below are the steps:
+
+1.Initialise lptr = rptr = 0.
+
+2.for each lptr move rptr to right until either you reach the end or get 3 pokemons with you.
+
+Below is the implementation of the above approach:
+
+// C++ program for the above approach 
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int catchEmAll(vector<int> pokemons)
+{
+    int ret = 0;
+    int lptr = 0, rptr = 0;
+    int n = pokemons.size();
+    map<int, int> cnt;
+    //function to increment count of number in map
+    auto addInt = [&](int x) {
+        cnt[x]++;
+    };
+    //function to decrement count of number in map
+    auto subInt = [&](int x) {
+        cnt[x]--;
+        //this is a crucial step as map does not remove entry when cnt[x] == 0
+        if (cnt[x] == 0)
+            cnt.erase(x);
+    };
+    //Iterate for each lptr
+    while (lptr < n)
+    {
+        while (rptr < n)
+        {
+            //Keep adding pokemon
+            addInt(pokemons[rptr]);
+            rptr++;
+            //if you have 3 pokemons in your bag stop and revert last one
+            if (cnt.size() == 3)
+            {
+                --rptr;
+                subInt(pokemons[rptr]);
+                break;
+            }
+        }
+        ret = max(ret, rptr - lptr);
+        subInt(pokemons[lptr]);
+        lptr++;
+    }
+    return ret;
+}
+
+// Driver Code 
+int main()
+{
+    cout << catchEmAll({1, 2, 1}) << '\n';
+    cout << catchEmAll({0, 1, 2, 2}) << '\n';
+    cout << catchEmAll({1, 2, 3, 2, 2}) << '\n';
+    cout << catchEmAll({3, 3, 3, 1, 2, 1, 1, 2, 3, 3, 4}) << '\n';
+}
+
+Output:
+3
+3
+4
+5
+
+Time Complexity: O(N), where N is number of pokemon.
+
+Got what you were looking for? Learn more and become self sufficient. Start learning Data Sructures & Algorithms with the help of the most trusted DSA Self Paced course, and that too at the most student-friendly price.
