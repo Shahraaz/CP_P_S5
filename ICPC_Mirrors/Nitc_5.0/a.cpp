@@ -24,34 +24,21 @@ public:
     ~Solution() {}
     void solveCase()
     {
-        string str;
-        cin >> str;
-        int n = str.size();
-        vector<int> grundy_dp(n, -1);
-        vector<int> end_pos(n, -1);
-        function<int(int, int)> grundy = [&](int start_ptr, int end_ptr) -> int {
-            if (start_ptr + 1 == end_ptr)
-                return 1;
-            if (end_pos[start_ptr] == end_ptr)
-                return 1 + grundy(start_ptr + 1, end_ptr - 1);
-            return grundy(start_ptr, end_pos[start_ptr]) ^ grundy(end_pos[start_ptr] + 1, end_ptr);
-        };
-        stack<int> prev;
+        int n;
+        cin >> n;
+        map<int, int> cnt;
         for (size_t i = 0; i < n; i++)
         {
-            if (str[i] == '(')
-                prev.push(i);
-            else
-            {
-                end_pos[prev.top()] = i;
-                prev.pop();
-            }
+            int x;
+            cin >> x;
+            cnt[x]++;
         }
-        db(end_pos);
-        if (grundy(0, n - 1) == 0)
-            cout << "Bob\n";
-        else
-            cout << "ATM\n";
+        int res = 0;
+        for (auto &x : cnt)
+        {
+            res += x.s - 1;
+        }
+        cout << res << '\n';
     }
 };
 

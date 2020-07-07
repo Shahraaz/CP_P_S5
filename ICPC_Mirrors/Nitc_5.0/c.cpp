@@ -24,34 +24,39 @@ public:
     ~Solution() {}
     void solveCase()
     {
-        string str;
-        cin >> str;
-        int n = str.size();
-        vector<int> grundy_dp(n, -1);
-        vector<int> end_pos(n, -1);
-        function<int(int, int)> grundy = [&](int start_ptr, int end_ptr) -> int {
-            if (start_ptr + 1 == end_ptr)
-                return 1;
-            if (end_pos[start_ptr] == end_ptr)
-                return 1 + grundy(start_ptr + 1, end_ptr - 1);
-            return grundy(start_ptr, end_pos[start_ptr]) ^ grundy(end_pos[start_ptr] + 1, end_ptr);
-        };
-        stack<int> prev;
-        for (size_t i = 0; i < n; i++)
+        // for (size_t a = 1; a <= 50; a++)
+        // {
+        //     for (size_t n = 1; n <= 50; n++)
+        //     {
+        bool ok = false;
+        int num = 0, num2 = 0;
+        ll a, n;
+        cin >> a >> n;
+        for (size_t b = 0; b < 1000000; b++)
         {
-            if (str[i] == '(')
-                prev.push(i);
-            else
+            if ((b * n + 1) % a == 0)
             {
-                end_pos[prev.top()] = i;
-                prev.pop();
+                ok = true;
+                num2 = b;
+                num = (b * n + 1) / a;
+                break;
             }
         }
-        db(end_pos);
-        if (grundy(0, n - 1) == 0)
-            cout << "Bob\n";
+        if (ok)
+        {
+            cout << num << '\n';
+        }
         else
-            cout << "ATM\n";
+        {
+            cout << -1 << '\n';
+        }
+        // else if (__gcd(a, n) == 1)
+        // {
+        //     cout << a << ' ' << n << '\n';
+        //     exit(0);
+        // }
+        //     }
+        // }
     }
 };
 

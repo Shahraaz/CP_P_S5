@@ -24,34 +24,31 @@ public:
     ~Solution() {}
     void solveCase()
     {
-        string str;
-        cin >> str;
-        int n = str.size();
-        vector<int> grundy_dp(n, -1);
-        vector<int> end_pos(n, -1);
-        function<int(int, int)> grundy = [&](int start_ptr, int end_ptr) -> int {
-            if (start_ptr + 1 == end_ptr)
-                return 1;
-            if (end_pos[start_ptr] == end_ptr)
-                return 1 + grundy(start_ptr + 1, end_ptr - 1);
-            return grundy(start_ptr, end_pos[start_ptr]) ^ grundy(end_pos[start_ptr] + 1, end_ptr);
-        };
-        stack<int> prev;
+        int n;
+        cin >> n;
+        vector<int> a(n);
+        ll sum = 0;
+        multiset<ll> s;
         for (size_t i = 0; i < n; i++)
         {
-            if (str[i] == '(')
-                prev.push(i);
-            else
-            {
-                end_pos[prev.top()] = i;
-                prev.pop();
-            }
+            cin >> a[i];
+            s.insert(a[i]);
+            sum += a[i];
         }
-        db(end_pos);
-        if (grundy(0, n - 1) == 0)
-            cout << "Bob\n";
-        else
-            cout << "ATM\n";
+        vector<int> ret;
+        for (size_t i = 0; i < n; i++)
+        {
+            auto currSum = sum - a[i];
+            s.erase(s.find(a[i]));
+            if (currSum % 2 == 0 && s.count(currSum / 2))
+                ret.pb(i + 1);
+            s.insert(a[i]);
+        }
+        cout << ret.size() << '\n';
+        for (auto &x : ret)
+        {
+            cout << x << ' ';
+        }
     }
 };
 
@@ -62,7 +59,7 @@ int32_t main()
     cin.tie(0);
 #endif
     int t = 1;
-    cin >> t;
+    // cin >> t;
     Solution mySolver;
     for (int i = 1; i <= t; ++i)
     {
