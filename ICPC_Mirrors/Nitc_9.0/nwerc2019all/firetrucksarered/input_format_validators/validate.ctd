@@ -1,0 +1,19 @@
+INT(2,2*10^5,n) NEWLINE
+
+SET(tot = 0)
+REP(n)
+    INT(1,2*10^5,m)
+    SET(tot = tot + m)
+
+    REPI(i,m)
+        SPACE
+        INT(1,10^9,d[i])
+    END
+
+    ASSERT(UNIQUE(d))
+    UNSET(d)
+    NEWLINE
+END
+
+ASSERT(tot <= 2*10^5)
+

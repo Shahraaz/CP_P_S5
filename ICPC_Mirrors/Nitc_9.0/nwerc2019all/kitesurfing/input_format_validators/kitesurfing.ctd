@@ -1,0 +1,13 @@
+INT(1,10^9,s) SPACE INT(1,10^9,d) SPACE INT(1,10^9,t) NEWLINE
+INT(0,500,n) NEWLINE
+REPI(i,n)
+	INT(1,s-1,l[i]) SPACE INT(l[i]+1,s-1,r[i]) NEWLINE
+	ASSERT( r[i]-l[i] <= d )
+END
+
+# Intervals are non-intersecting and given in order:
+IF( n > 0 )
+	REPI(i,n-1)
+		ASSERT( r[i] < l[i+1] )
+	END
+END

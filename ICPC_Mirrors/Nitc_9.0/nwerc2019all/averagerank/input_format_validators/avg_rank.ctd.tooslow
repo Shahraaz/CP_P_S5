@@ -1,0 +1,12 @@
+INT(1,3*10^5,n) SPACE INT(1,3*10^5,w) NEWLINE
+SET(tot=0)
+REP(w)
+  INT(0,n,k)
+  SET(tot=tot+k)
+  REP(k)
+    SPACE
+    INT(1,n)
+  END
+  NEWLINE
+END
+ASSERT(tot<=10^6)

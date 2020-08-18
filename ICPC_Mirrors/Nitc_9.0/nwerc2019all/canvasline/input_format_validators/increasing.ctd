@@ -1,0 +1,13 @@
+INT(1,1000,n) NEWLINE
+SET(y = 0)
+REPI(i, n)
+  INT(y, 10^9-10, x) SPACE
+  INT(x+10, 10^9, y) NEWLINE
+END
+
+INT(0,2000,p) NEWLINE
+SET(x = -1)
+REPI(i, p, SPACE)
+  INT(x+1, 10^9, x)
+END
+NEWLINE

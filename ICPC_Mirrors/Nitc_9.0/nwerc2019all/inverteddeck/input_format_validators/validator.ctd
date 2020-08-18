@@ -1,0 +1,7 @@
+INT(1,10^6,n)
+NEWLINE
+
+REP(n, SPACE)
+  INT(1, 10^9)
+END
+NEWLINE

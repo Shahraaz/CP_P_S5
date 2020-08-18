@@ -1,0 +1,8 @@
+name: Expeditious Cubing
+author: Paul Wild
+license: cc by-sa
+source: Northwestern Europe Regional Contest (NWERC) 2019
+source_url: http://2019.nwerc.eu
+
+limits:
+   time_multiplier: 8

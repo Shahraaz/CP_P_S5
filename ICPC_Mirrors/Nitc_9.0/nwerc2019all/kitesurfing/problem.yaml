@@ -1,0 +1,8 @@
+name: Kitesurfing
+author: Nils Gustafsson
+license: cc by-sa
+source: Northwestern Europe Regional Contest (NWERC) 2019
+source_url: http://2019.nwerc.eu
+
+limits:
+   time_multiplier: 1.5  # per.py is a slow outlier

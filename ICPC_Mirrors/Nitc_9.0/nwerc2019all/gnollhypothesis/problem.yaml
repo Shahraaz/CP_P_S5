@@ -1,0 +1,11 @@
+name: Gnoll Hypothesis
+author: Alexander Dietsch
+license: cc by-sa
+source: Northwestern Europe Regional Contest (NWERC) 2019
+source_url: http://2019.nwerc.eu
+
+validator_flags: float_tolerance 1e-6
+
+limits:
+   time_multiplier: 7.5
+

@@ -1,0 +1,165 @@
+#!/usr/bin/env python3
+
+import os
+import random
+import solve
+import sys
+
+limit_to_tests = (set(map(int, sys.argv[1:])) if len(sys.argv) > 1 else None)
+
+if not os.path.isdir('secret'):
+ if not os.path.isdir('../data/secret'):
+    sys.stderr.write(
+        'ERROR: directory ./secret does not exist. Are you running from ./data?\n')
+    sys.exit(1)
+ else:
+   sys.stderr.write(
+        'WARNING: running from the wrong directory. Please run from ./data.\n')
+
+
+def long_line(n, p, density=0.1):
+  v = []
+  x = []
+  for i in range(n):
+    v += [(i*33, (i+1)*33)]
+  have = [0 for i in range(n)]
+  for i in range(1,n):
+    if random.random() < density:
+      have[i-1] += 1
+      have[i] += 1
+      x += [v[i][0]]
+  while len(x) < p:
+    for i in range(p-len(x)):
+      b = random.randint(0, n-1)
+      if have[b] < 2:
+        x += [random.randint(v[b][0]+1,v[b][1]-1)]
+        have[b] += 1
+  return (v, list(set(x)))
+
+def generate_v(n):
+  v = []
+  x = 0
+  for i in range(n):
+    if random.randint(0, 100) == 0:
+      x += random.randint(1, 100)
+    v += [(x, x + random.randint(10, 1000000))]
+    x = v[-1][-1]
+  return v
+
+def generate_x(v, pattern):
+  x = set()
+  for i in range(len(v)):
+    if pattern[i*2+0] > 0: x.add(v[i][0])
+    if pattern[i*2+2] > 0: x.add(v[i][1])
+    q = pattern[i*2+1]
+    while q > 0:
+      z = random.randint(v[i][0]+1,v[i][1]-1)
+      if z not in x:
+        x.add(z)
+        q -= 1
+  return x
+
+def generate(n, res):
+  v = generate_v(n)
+  return v, generate_x(v, res)
+
+def ones_and_twos(n, p):
+  res = [random.randint(0, 1)]
+  for i in range(n):
+    res += [random.randint(0, 2-res[-1])]
+    res += [random.randint(0, 2-res[-1]-res[-2])]
+  return generate(n, res)
+
+def all_inner(n, p=0.9):
+  res = [0]
+  for i in range(n):
+    if random.random() < p:
+      res += [2, 0]
+    else:
+      res += [1, 0]
+  return generate(n, res)
+
+def many_useless_pins(n, p):
+  v = []
+  for i in range(n):
+    if i*2 < n:
+      v += [(i*10, (i+1)*10)]
+    else:
+      v += [((i+n)*10, (i+n+1)*10)]
+  x = []
+  for i in range(p):
+    x += [random.randint((n/2)*10, (n*3/2)*10)]
+  return v, list(set(x))
+
+def well_hidden(n, p):
+  v = [(10**9) // (n+1) for i in range(n)]
+  secrets = set()
+  for z in range(4):
+    i = random.randint(0, n-1)
+    v[i] = 10
+    secrets.add(i)
+  last_y = 0
+  for i in range(n):
+    v[i] = (last_y, last_y + v[i])
+    last_y = v[i][1]
+  x = set()
+  for i in secrets:
+    x |= set([v[i][0]-2, v[i][0]-1, v[i][1]+1, v[i][1]+2])
+  x-= set(range(-10,0))
+  return v, list(x)
+
+def far_and_wide(n, p):
+  intervals = []
+  xes = []
+  for i in range((n+0) // 2): intervals += [(i*10, i*10+10)]
+  for i in range((n+1) // 2): intervals += [(10**9-i*10-10, 10**9-i*10)]
+  for i in range((p+0) // 2): xes += [i*15]
+  for i in range((p+1) // 2): xes += [10**9-i*15]
+  return list(sorted(intervals)), list(sorted(xes))
+
+def write_case(tc, n, p, strategy):
+  if limit_to_tests is not None and tc not in limit_to_tests:
+    return
+
+  random.seed('nwerc2019piuzqt:' + str(tc))
+  data = strategy(n=n, p=p)
+
+  tcname = f'../data/secret/{tc:02d}'.format(tc=tc)
+  print('Writing case: {:02d}'.format(tc))
+  with open(tcname +'.in', 'w') as f_in:
+    f_in.write("{}\n".format(len(data[0])))
+    f_in.write('\n'.join(['{} {}'.format(i[0], i[1]) for i in data[0]]) + '\n')
+    f_in.write("{}\n".format(len(data[1])))
+    f_in.write(' '.join(map(str, sorted(data[1]))) + '\n')
+  with open(tcname + '.ans', 'w') as f_ans:
+    f_ans.write("{}\n".format(solve.solve(data[0], sorted(data[1]))))
+
+def main():
+  write_case(tc=14, n=1000, p=100, strategy=long_line)
+  write_case(tc=15, n=1000, p=800, strategy=long_line)
+  write_case(tc=16, n=1000, p=1000, strategy=long_line)
+  write_case(tc=17, n=1000, p=1400, strategy=long_line)
+  write_case(tc=18, n=1000, p=1700, strategy=long_line)
+  write_case(tc=19, n=10, p=None, strategy=ones_and_twos)
+  write_case(tc=20, n=100, p=None, strategy=ones_and_twos)
+  write_case(tc=21, n=1000, p=None, strategy=ones_and_twos)
+  write_case(tc=22, n=1000, p=None, strategy=ones_and_twos)
+  write_case(tc=23, n=1000, p=0.55, strategy=all_inner)
+  write_case(tc=24, n=1000, p=0.95, strategy=all_inner)
+  write_case(tc=25, n=1000, p=1.00, strategy=all_inner)
+  write_case(tc=26, n=1000, p=2000, strategy=many_useless_pins)
+  write_case(tc=27, n=1000, p=0, strategy=well_hidden)
+  write_case(tc=28, n=1000, p=0, strategy=well_hidden)
+  # Reserved tc=29: manual case
+  write_case(tc=30, n=1000, p=0, strategy=well_hidden)
+  write_case(tc=31, n=1000, p=0, strategy=well_hidden)
+  write_case(tc=32, n=1000, p=0, strategy=well_hidden)
+  write_case(tc=33, n=1000, p=0, strategy=well_hidden)
+  # Reserved tc=34: manual case
+  # Reserved tc=35: manual case
+  # Reserved tc=36: manual case
+  # Reserved tc=37: manual case
+  write_case(tc=38, n=1000, p=2000, strategy=far_and_wide)
+
+if __name__=='__main__':
+  main()

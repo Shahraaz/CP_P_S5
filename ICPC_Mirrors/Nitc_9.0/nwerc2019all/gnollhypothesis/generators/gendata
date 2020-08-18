@@ -1,0 +1,16 @@
+#!/bin/bash
+
+SOL=../tools/per_high_precision_solution
+make -C ../tools per_high_precision_solution
+if [ $? != 0 ]; then
+    echo "*** Failed to build multiprecision solution, falling back to long double for generating answers"
+    g++ -O2 -o sol -std=gnu++17 ../submissions/accepted/per_fft_longdouble.cc
+    SOL=./sol
+fi
+
+set -e
+python  ../generators/gendata.py
+
+for f in ../data/secret/*in; do
+    time $SOL < $f > ${f%.in}.ans
+done
