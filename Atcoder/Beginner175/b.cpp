@@ -24,6 +24,37 @@ struct Solution
 
 void Solution::solveCase()
 {
+    int n;
+    cin >> n;
+    vector<int> v;
+    for (size_t i = 0; i < n; i++)
+    {
+        int x;
+        cin >> x;
+        v.pb(x);
+    }
+    int res = 0;
+    for (size_t i = 0; i < n; i++)
+    {
+        int x = v[i];
+        for (size_t j = 0; j < i; j++)
+        {
+            if (x == v[j])
+                continue;
+            for (size_t z = 0; z < j; z++)
+            {
+                if (x == v[z])
+                    continue;
+                if (v[j] == v[z])
+                    continue;
+                if (v[j] + v[z] > x)
+                    if (x + v[z] > v[j])
+                        if (v[j] + x > v[z])
+                            res++;
+            }
+        }
+    }
+    cout << res << '\n';
 }
 
 int32_t main()

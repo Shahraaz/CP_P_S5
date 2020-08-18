@@ -24,6 +24,31 @@ struct Solution
 
 void Solution::solveCase()
 {
+    ll x, k, d;
+    cin >> x >> k >> d;
+    // x = k = d = 1e18;
+    // --k;
+    // x = abs(x);
+    ll t = abs(x) / d;
+    db(x, t, d, k);
+    if (t > k)
+    {
+        cout << abs(x - ((x > 0) - (x < 0)) * k * d) << '\n';
+    }
+    else
+    {
+        db(x, t, d, k);
+        x = x - ((x > 0) - (x < 0)) * t * d;
+        db(x);
+        k -= t;
+        ll y = min(abs(x + d), abs(x - d));
+        if (k & 1)
+            cout << y << '\n';
+        else
+        {
+            cout << abs(x) << '\n';
+        }
+    }
 }
 
 int32_t main()

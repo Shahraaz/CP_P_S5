@@ -24,6 +24,26 @@ struct Solution
 
 void Solution::solveCase()
 {
+    string s;
+    cin >> s;
+    char back = '$';
+    int len = 0, maxLen = 0;
+    for (auto &x : s)
+    {
+        if (back == x)
+            len++;
+        else
+        {
+            if (back == 'R')
+                maxLen = max(maxLen, len);
+            len = 1;
+            back = x;
+        }
+    }
+    if (back == 'R')
+        maxLen = max(maxLen, len);
+
+    cout << maxLen << '\n';
 }
 
 int32_t main()
