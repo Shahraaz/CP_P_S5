@@ -14,6 +14,8 @@ using ll = long long;
 #define pb push_back
 #define all(v) v.begin(), v.end()
 
+#define int ll
+
 const int NAX = 2e5 + 5, MOD = 1000000007;
 
 struct Solution
@@ -24,154 +26,147 @@ struct Solution
 
 struct Player
 {
-    ll id;
-    ll cummSum;
+    int idx;
     int rank;
-    int qCnt;
-    Player(ll id, ll cummSum)
+    int prefSum;
+    int qSolveCnt;
+    Player(int idx, int rank, int prefSum, int qSolveCnt)
     {
-        this->id = id;
-        this->cummSum = cummSum;
-        rank = 1;
-        qCnt = 0;
+        this->idx = idx;
+        this->rank = rank;
+        this->prefSum = prefSum;
+        this->qSolveCnt = qSolveCnt;
     }
     bool operator<(const Player &rhs) const
     {
-        if (qCnt == rhs.qCnt)
-            return id < rhs.id;
-        return qCnt < rhs.qCnt;
+        if (qSolveCnt == rhs.qSolveCnt)
+            return idx < rhs.idx;
+        return qSolveCnt < rhs.qSolveCnt;
     }
 };
 
-ostream &operator<<(ostream &ou, const Player &p)
-{
-    ou << "player id " << p.id << " rank " << p.rank << " currSum " << p.cummSum << " qcnt " << p.qCnt;
-    return ou;
-}
+vector<Player> players;
 
-struct Team
+struct EqualGroup
 {
-    ll prevupdateIdx;
-    ll overSum;
-    ll rank;
-    int qCnt;
-    set<Player *> currMembers;
-    Team(ll prevupdateIdx, ll overSum, ll rank, int QCnt = 0)
+    mutable set<int> equalGroupMembers;
+    mutable int rank;
+    mutable int prefSum;
+    mutable int qSolveCnt;
+    mutable int lastUpdidx;
+
+    EqualGroup(int rank, int prefSum, int qSolveCnt, int lastUpdidx)
     {
-        this->prevupdateIdx = prevupdateIdx;
-        this->overSum = overSum;
         this->rank = rank;
-        this->qCnt = QCnt;
+        this->prefSum = prefSum;
+        this->qSolveCnt = qSolveCnt;
+        this->lastUpdidx = lastUpdidx;
     }
-    void addMember(Player *p, int idx)
+    void addMember(vector<int> memberIdList, int idx) const
     {
-        p->cummSum -= (prevupdateIdx - idx) * rank;
-        p->rank = rank;
-        p->qCnt = qCnt;
-        currMembers.insert(p);
+        prefSum += (idx - lastUpdidx) * (rank);
+        lastUpdidx = idx;
+        for (auto &x : memberIdList)
+        {
+            players[x].prefSum -= prefSum;
+            players[x].rank = rank;
+            equalGroupMembers.insert(x);
+        }
     }
-    void removeMember(Player *p, int idx)
+    bool removeMembers(vector<int> memberIdList, int idx) const
     {
-        p->cummSum += (prevupdateIdx - idx) * rank;
-        // p->rank = rank;
-        currMembers.erase(p);
-        overSum += (prevupdateIdx - idx) * rank;
-        if (prevupdateIdx != idx)
-            rank++;
-        prevupdateIdx = idx;
+        prefSum += (idx - lastUpdidx) * (rank);
+        rank += memberIdList.size();
+        for (auto &x : memberIdList)
+        {
+            players[x].prefSum += prefSum;
+            players[x].qSolveCnt++;
+            // players[x].rank = rank;
+            equalGroupMembers.erase(x);
+        }
+        lastUpdidx = idx;
+        return equalGroupMembers.empty();
     }
-    bool operator<(const Team &rhs) const
+    bool operator<(const EqualGroup &rhs) const
     {
-        return qCnt > rhs.qCnt;
+        return qSolveCnt < rhs.qSolveCnt;
     }
 };
-
-ostream &operator<<(ostream &ou, const Team &p)
-{
-    ou << "team prevupdateIdx " << p.prevupdateIdx << " rank " << p.rank << " overSum " << p.overSum << ' ' << "Qcnt " << p.qCnt << ' ';
-    for (auto &x : p.currMembers)
-        ou << *x << ' ';
-    return ou;
-}
 
 void Solution::solveCase()
 {
+    set<pair<int, EqualGroup>> rankList;
+    EqualGroup E(0, 0, 0, 0);
     int n, w;
     cin >> n >> w;
-    vector<Player *> P(n);
-    for (size_t i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        P[i] = new Player(i, 0);
+        Player p(i, 0, 0, 0);
+        players.pb(p);
+        E.addMember({i}, 0);
     }
-    set<struct Team> rankedList;
-    Team everyone(-1, 0, 1);
-    for (auto &x : P)
-        everyone.addMember(x, -1);
-    rankedList.insert(everyone);
-    for (size_t i = 0; i < w; i++)
+    rankList.insert({0, E});
+    for (int i = 0; i < w; i++)
     {
         int k;
         cin >> k;
-        set<pair<int, Player *>> vv;
+        map<int, vector<int>> mp;
         for (size_t j = 0; j < k; j++)
         {
-            int c;
-            cin >> c;
-            --c;
-            vv.insert({P[c]->rank, P[c]});
+            int x;
+            cin >> x;
+            --x;
+            mp[players[x].qSolveCnt].pb(x);
         }
-        // db(vv);
-        // for (auto &x : vv)
-        // {
-        //     cout << x.f << ' ' << *(x.s) << '\n';
-        // }
-        db("before");
-        for (auto &x : rankedList)
+        for (auto x : mp)
         {
-            cout << x.qCnt << ' ' << x.rank << '\n';
-            for (auto &y : x.currMembers)
+            auto it = rankList.lower_bound({x.f, EqualGroup(0, 0, 0, 0)});
+            if (it != rankList.end())
             {
-                cout << *y << '\n';
+                int prevRank = (it->s).rank;
+                if ((it->s).removeMembers(x.s, i))
+                    rankList.erase(it);
+                it = rankList.lower_bound({x.f + 1, EqualGroup(0, 0, 0, 0)});
+                if (it != rankList.end() && ((it->s).qSolveCnt == (x.f + 1)))
+                    (it->s).addMember(x.s, i);
+                else
+                {
+                    EqualGroup E(prevRank, 0, x.f + 1, i);
+                    E.addMember(x.s, i);
+                    rankList.insert({x.f + 1, E});
+                }
             }
-            // cout << '\n';
         }
-        for (auto &x : vv)
+        db(i);
+        db(mp);
+#ifdef LOCAL
+        for (auto &x : rankList)
+            db(x.f, x.s.rank, x.s.equalGroupMembers);
+#endif
+    }
+    vector<int> prevRank(n);
+    for (auto &x : rankList)
+    {
+        vector<int> temp;
+        for (auto &y : (x.s).equalGroupMembers)
         {
-            auto it = rankedList.lower_bound(Team(0, 0, (x.s)->qCnt));
-            if (it != rankedList.end())
-            {
-                auto temp = *it;
-                rankedList.erase(it);
-                // temp.removeMember()
-                temp.removeMember(P[x.s->id], i);
-                rankedList.insert(temp);
-            }
-            it = rankedList.lower_bound(Team(0, 0, (x.s)->qCnt + 1));
-            if (it != rankedList.end() && (it->qCnt) == (1 + (x.s)->qCnt))
-            {
-                auto temp = *it;
-                rankedList.erase(it);
-                // temp.removeMember()
-                temp.addMember(P[x.s->id], i);
-                rankedList.insert(temp);
-            }
-            else
-            {
-                Team temp = Team(i, 0, (x.s)->rank, 1 + (x.s)->qCnt);
-                temp.addMember(P[x.s->id], i);
-                rankedList.insert(temp);
-            }
+            temp.pb(y);
+            // db(y);
+            prevRank[y] = x.s.rank;
+            // prevRank[y] = players[y].prefSum
         }
-        db("after");
-        for (auto &x : rankedList)
+        x.s.removeMembers(temp, w - 1);
+        for (auto &y : temp)
         {
-            cout << x.qCnt << ' ' << x.rank << '\n';
-            for (auto &y : x.currMembers)
-            {
-                cout << *y << '\n';
-            }
-            // cout << '\n';
+            db(y, players[y].prefSum);
+            db(prevRank[y]);
+            prevRank[y] += players[y].prefSum;
         }
+    }
+    for (auto &x : prevRank)
+    {
+        cout << fixed << setprecision(9);
+        cout << ((long double)x / w + 1) << '\n';
     }
 }
 
