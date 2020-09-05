@@ -24,42 +24,25 @@ struct Solution
 
 void Solution::solveCase()
 {
-    int n, m, t;
-    cin >> n >> m >> t;
-    vector<vector<int>> adj(n);
-    set<int> incoming;
-    for (size_t i = 0; i < m; i++)
+    string s, t;
+    cin >> s >> t;
+    int res = MOD;
+    for (size_t i = 0; i < s.size(); i++)
     {
-        int x, y;
-        cin >> x >> y;
-        if (y == t)
-            incoming.insert(x);
-        else
+        int cnt = 0;
+        for (size_t j = 0; j < t.size(); j++)
         {
-            adj[y].pb(x);
+            if (i + j >= s.size())
+            {
+                cnt = MOD;
+                break;
+            }
+            if (s[i + j] != t[j])
+                cnt++;
         }
+        res = min(res, cnt);
     }
-    vector<set<int>> omk(n);
-    function<void(int, int)> dfs = [&](int x, int node) -> void {
-        if (omk[x].count(node))
-            return;
-        if (omk[x].size() >= 2)
-            return;
-        omk[x].insert(node);
-        for (auto &child : adj[x])
-            dfs(child, node);
-    };
-    for (auto &x : incoming)
-        dfs(x, x);
-    vector<int> ret;
-    for (auto &x : incoming)
-        if (omk[x].size() == 1)
-            ret.pb(x);
-    cout << ret.size() << '\n';
-    for (auto &x : ret)
-    {
-        cout << x << '\n';
-    }
+    cout << res << '\n';
 }
 
 int32_t main()
