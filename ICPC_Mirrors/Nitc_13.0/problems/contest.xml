@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<contest url="https://polygon.codeforces.com/c/13521">
+    <names>
+        <name language="english" value="ICPC 2019-2020 North-Western Russia Regional Contest"/>
+    </names>
+    <statements>
+        <statement language="english" type="application/pdf" url="https://polygon.codeforces.com/c/13521/english/statements.pdf"/>
+    </statements>
+    <problems>
+        <problem index="a" url="https://polygon.codeforces.com/p7CaGg3/pkunyavskiy/accurate-movement"/>
+        <problem index="b" url="https://polygon.codeforces.com/p9ptYG5/dvorkin/bad-treap"/>
+        <problem index="c" url="https://polygon.codeforces.com/p2igAKh/kgeorgiy/cross-stitch"/>
+        <problem index="d" url="https://polygon.codeforces.com/p1AAhDX/tourist/double-palindrome"/>
+        <problem index="e" url="https://polygon.codeforces.com/p43rFoS/qwerty787788/equidistant"/>
+        <problem index="f" url="https://polygon.codeforces.com/p6urrIA/pkunyavskiy/foreach"/>
+        <problem index="g" url="https://polygon.codeforces.com/p2zTiWv/tourist/golf"/>
+        <problem index="h" url="https://polygon.codeforces.com/p6NQG61/niyaznigmatul/high"/>
+        <problem index="i" url="https://polygon.codeforces.com/p5uGJsr/izban/ideal"/>
+        <problem index="j" url="https://polygon.codeforces.com/p6LmTNo/avasilyev/just-the-last-digit"/>
+        <problem index="k" url="https://polygon.codeforces.com/p398DSv/kgeorgiy/kingdom"/>
+        <problem index="l" url="https://polygon.codeforces.com/p5xDolU/ayoyia/lengths"/>
+        <problem index="m" url="https://polygon.codeforces.com/p4VHSUK/mmirzayanov/managing"/>
+    </problems>
+</contest>

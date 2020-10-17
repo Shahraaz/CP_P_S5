@@ -1,0 +1,30 @@
+Do you like really good programming languages?  Let's, for example, discuss PHP.
+
+PHP, like many other languages, supports arrays. For purposes of this problem, we only consider an array with consecutive integer indexes starting from 0. It would be denoted as $[a_0, a_1, \dots, a_{n-1}]$.
+
+PHP, like many other languages, supports variables. All of them must start with \t{\$} symbol. We will have two in this problem: array \t{\$a}, and its element \t{\$x}.
+
+Also, as many other languages, PHP supports loops over all elements of array. We consider only two of four possible forms of \t{foreach} loop:
+\begin{align*}
+\text{non-reference form:\hspace{3em}} & \t{foreach (\$a as~~\$x) // code} \\
+\text{reference form:\hspace{3em}} & \t{foreach (\$a as~\&\$x) // code}
+\end{align*}
+
+Formally, non-reference form goes through elements of the array one by one, and sets the value of \t{\$x} to the value of the corresponding element and then executes specified code. Reference form goes though elements of the array one by one and makes \t{\$x} a reference to the corresponding element and then executes code. So, in the first case, if one changes the value of \t{\$x}, the value of the array element wouldn't be changed, while in the second one it would.
+
+PHP supports a lot of other control-flow constructions. Two of them we are interested in are \t{if} and \t{break}. As in other languages, \t{break} stops the loop immediately, and \t{if} allows to execute code only if some condition holds.
+
+Unfortunately, unlike many other languages, PHP doesn't have variable scopes. So, even after a reference form \t{foreach} loop, variable \t{\$x} still would be a reference to an element of the array it was set to last time. So, changing its value after the loop would still change the element of the array. On the other side, making \t{\$x} a reference to another element doesn't change the value of the previous element. Let's consider an example.
+
+One has an array $[1, 2, 3]$ and executes the following code 
+
+\begin{center}
+\t{foreach (\$a as~\&\$x) if (\$x == 2) break;} \\
+\t{foreach (\$a as~~\$x) if (\$x == 2) break;} \\
+\end{center}
+
+After the first loop \t{\$x} is a reference to the middle element of the array. On the first step of the second loop, the array becomes $[1, 1, 3]$, because the value of \t{\$x} is changed to 1, and it is the reference to the middle element. On the second step, the value of \t{\$x} would be changed to a new value of the next element of the array, which turned out to be 1 again. It's still not equal to 2, so on the next step, the value of \t{\$x} changes to 3, and the resulting state of the array is $[1, 3, 3]$.
+
+As you see, code can change arrays even having no explicit sets of variables.
+
+Can you create a program that changes one array to another using only lines of the form shown in the example above?

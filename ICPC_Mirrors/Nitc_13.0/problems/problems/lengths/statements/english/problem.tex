@@ -1,0 +1,23 @@
+\begin{problem}{Lengths and Periods}{standard input}{standard output}{2 seconds}{512 megabytes}
+
+In mathematics and computer science, the critical exponent of a string describes the largest number of times its contiguous substring is repeated in a row. The trick is that it can be a fraction. For example, the critical exponent of ``Mississippi'' is $7/3$, as it contains the substring ``ississi'', which is of length 7 and period 3.
+
+The formal definition is as follows. Let $w$ and $x$ be non-empty strings. $x$ is said to occur in $w$ with exponent $\alpha$, for positive rational $\alpha$, if there is a substring $y$ in $w$ such as $y = x^nx_0$ where $x^n$ is $x$ repeated $n$ times, $x_0$ is a prefix of $x$, $n$ is the integer part of $\alpha$, and the length $|y|$ is equal to $\alpha |x|$. The critical exponent of $w$ is the maximum $\alpha$ over all $x^\alpha$ that occur in $w$.
+
+Given a string $w$, find its critical exponent.
+
+\InputFile
+The only line contains a string $w$~--- a sequence of lowercase English letters ($1 \le |w| \le 200\,000$).
+
+\OutputFile
+Output the critical exponent of $w$ as an irreducible fraction $p/q$ where $p$ and $q$ are integers without leading zeroes.
+
+\Examples
+
+\begin{example}
+\exmpfile{example.01}{example.01.a}%
+\exmpfile{example.02}{example.02.a}%
+\end{example}
+
+\end{problem}
+

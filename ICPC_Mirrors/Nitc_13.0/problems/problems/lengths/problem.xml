@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<problem revision="18" short-name="lengths" url="https://polygon.codeforces.com/p5xDolU/ayoyia/lengths">
+    <names>
+        <name language="english" value="Lengths and Periods"/>
+    </names>
+    <statements>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/english/problem.tex" type="application/x-tex"/>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/.html/english/problem.html" type="text/html"/>
+        <statement language="english" path="statements/.pdf/english/problem.pdf" type="application/pdf"/>
+    </statements>
+    <tutorials>
+        <tutorial charset="UTF-8" language="english" mathjax="true" path="statements/english/tutorial.tex" type="application/x-tex"/>
+        <tutorial language="english" path="statements/.pdf/english/tutorial.pdf" type="application/pdf"/>
+    </tutorials>
+    <judging cpu-name="Intel(R) Core(TM) i3-8100 CPU @ 3.60GHz" cpu-speed="3600" input-file="" output-file="">
+        <testset name="tests">
+            <time-limit>2000</time-limit>
+            <memory-limit>536870912</memory-limit>
+            <test-count>32</test-count>
+            <input-path-pattern>tests/%02d</input-path-pattern>
+            <answer-path-pattern>tests/%02d.a</answer-path-pattern>
+            <tests>
+                <test method="manual" sample="true"/>
+                <test method="manual" sample="true"/>
+                <test method="manual"/>
+                <test cmd="gen_a 200000" method="generated"/>
+                <test cmd="gen_rand 100" method="generated"/>
+                <test cmd="gen_rand 5000" method="generated"/>
+                <test cmd="gen_rand 200000" method="generated"/>
+                <test cmd="gen_thue 5000" method="generated"/>
+                <test cmd="gen_thue 200000" method="generated"/>
+                <test cmd="gen_thue_blocks 5000" method="generated"/>
+                <test cmd="gen_thue_blocks 200000" method="generated"/>
+                <test cmd="gen_ans_1 1000 239 31" method="generated"/>
+                <test cmd="gen_ans_1 5000 3121 2923" method="generated"/>
+                <test cmd="gen_ans_1 5000 2325 12" method="generated"/>
+                <test cmd="gen_ans_1 5000 14 9" method="generated"/>
+                <test cmd="gen_ans_1 5000 3 1" method="generated"/>
+                <test cmd="gen_ans_1 5000 5000 1000" method="generated"/>
+                <test cmd="gen_ans_1 5000 5000 4999" method="generated"/>
+                <test cmd="gen_ans_1 200000 322 228" method="generated"/>
+                <test cmd="gen_ans_1 200000 19 3" method="generated"/>
+                <test cmd="gen_ans_1 200000 6 2" method="generated"/>
+                <test cmd="gen_ans_1 200000 15511 2323" method="generated"/>
+                <test cmd="gen_ans_1 200000 151851 31515" method="generated"/>
+                <test cmd="gen_ans_1 200000 200000 40000" method="generated"/>
+                <test cmd="gen_ans_1 200000 200000 12" method="generated"/>
+                <test cmd="gen_ans_1 200000 170000 1512" method="generated"/>
+                <test cmd="gen_ans_1 200000 100000 135" method="generated"/>
+                <test cmd="gen_dq 127" method="generated"/>
+                <test cmd="gen_dq 4095" method="generated"/>
+                <test cmd="gen_dq 131071" method="generated"/>
+                <test cmd="gen_dq 199999" method="generated"/>
+                <test cmd="gen_dq 200000" method="generated"/>
+            </tests>
+        </testset>
+    </judging>
+    <files>
+        <resources>
+            <file path="files/olymp.sty"/>
+            <file path="files/problem.tex"/>
+            <file path="files/statements.ftl"/>
+            <file path="files/testlib.h" type="h.g++"/>
+            <file path="files/tutorial.tex"/>
+        </resources>
+        <executables>
+            <executable>
+                <source path="files/gen_a.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_a.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_ans_1.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_ans_1.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_dq.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_dq.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_rand.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_rand.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_thue.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_thue.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_thue_blocks.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_thue_blocks.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/validate.cpp" type="cpp.g++17"/>
+                <binary path="files/validate.exe" type="exe.win32"/>
+            </executable>
+        </executables>
+    </files>
+    <assets>
+        <checker name="std::wcmp.cpp" type="testlib">
+            <source path="files/check.cpp" type="cpp.g++17"/>
+            <binary path="check.exe" type="exe.win32"/>
+            <copy path="check.cpp"/>
+            <testset>
+                <test-count>0</test-count>
+                <input-path-pattern>files/tests/checker-tests/%02d</input-path-pattern>
+                <output-path-pattern>files/tests/checker-tests/%02d.o</output-path-pattern>
+                <answer-path-pattern>files/tests/checker-tests/%02d.a</answer-path-pattern>
+                <tests/>
+            </testset>
+        </checker>
+        <validators>
+            <validator>
+                <source path="files/validate.cpp" type="cpp.g++17"/>
+                <binary path="files/validate.exe" type="exe.win32"/>
+                <testset>
+                    <test-count>0</test-count>
+                    <input-path-pattern>files/tests/validator-tests/%02d</input-path-pattern>
+                    <tests/>
+                </testset>
+            </validator>
+        </validators>
+        <solutions>
+            <solution tag="main">
+                <source path="solutions/critical-exponent_ag.cpp" type="cpp.g++17"/>
+                <binary path="solutions/critical-exponent_ag.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="time-limit-exceeded">
+                <source path="solutions/critical-exponent_just_dfs_ag.cpp" type="cpp.g++17"/>
+                <binary path="solutions/critical-exponent_just_dfs_ag.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="time-limit-exceeded">
+                <source path="solutions/critical-exponent_n2_ag.cpp" type="cpp.g++17"/>
+                <binary path="solutions/critical-exponent_n2_ag.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="wrong-answer">
+                <source path="solutions/critical-exponent_small_ans_ag.cpp" type="cpp.g++17"/>
+                <binary path="solutions/critical-exponent_small_ans_ag.exe" type="exe.win32"/>
+            </solution>
+        </solutions>
+    </assets>
+    <properties>
+        <property name="tests-wellformed" value="true"/>
+    </properties>
+    <stresses>
+        <stress-count>2</stress-count>
+        <stress-path-pattern>stresses/%03d</stress-path-pattern>
+        <list>
+            <stress index="2" path="stresses/002"/>
+            <stress index="1" path="stresses/001"/>
+        </list>
+    </stresses>
+    <tags>
+        <tag value="small to large"/>
+        <tag value="string suffix structures"/>
+    </tags>
+</problem>

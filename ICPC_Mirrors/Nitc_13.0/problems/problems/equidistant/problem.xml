@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<problem revision="17" short-name="equidistant" url="https://polygon.codeforces.com/p43rFoS/qwerty787788/equidistant">
+    <names>
+        <name language="english" value="Equidistant"/>
+    </names>
+    <statements>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/english/problem.tex" type="application/x-tex"/>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/.html/english/problem.html" type="text/html"/>
+        <statement language="english" path="statements/.pdf/english/problem.pdf" type="application/pdf"/>
+    </statements>
+    <tutorials>
+        <tutorial charset="UTF-8" language="english" mathjax="true" path="statements/english/tutorial.tex" type="application/x-tex"/>
+        <tutorial language="english" path="statements/.pdf/english/tutorial.pdf" type="application/pdf"/>
+    </tutorials>
+    <judging cpu-name="Intel(R) Core(TM) i3-8100 CPU @ 3.60GHz" cpu-speed="3600" input-file="" output-file="">
+        <testset name="tests">
+            <time-limit>2000</time-limit>
+            <memory-limit>536870912</memory-limit>
+            <test-count>67</test-count>
+            <input-path-pattern>tests/%02d</input-path-pattern>
+            <answer-path-pattern>tests/%02d.a</answer-path-pattern>
+            <tests>
+                <test method="manual" sample="true"/>
+                <test method="manual" sample="true"/>
+                <test cmd="Equidistant_gen max_n=10 max_m=10 type=random ans_exist=true 1111" method="generated"/>
+                <test cmd="Equidistant_gen max_n=20 max_m=20 type=random ans_exist=true 112" method="generated"/>
+                <test cmd="Equidistant_gen max_n=30 max_m=30 type=random ans_exist=true 1122" method="generated"/>
+                <test cmd="Equidistant_gen max_n=40 max_m=40 type=random ans_exist=true 1124" method="generated"/>
+                <test cmd="Equidistant_gen max_n=50 max_m=50 type=random ans_exist=true 1126" method="generated"/>
+                <test cmd="Equidistant_gen max_n=50 max_m=50 type=random ans_exist=false 11265" method="generated"/>
+                <test cmd="Equidistant_gen max_n=100000 max_m=100000 type=random ans_exist=true 11442" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=200000 type=random ans_exist=true 114424" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=100000 type=random ans_exist=true 114442" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=200000 type=random ans_exist=true 1144421" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=200000 type=random ans_exist=true 1144422" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=200000 type=random ans_exist=true 1144423" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=50000 type=spec1 use_max=true ans_exist=true 11111" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=10000 type=spec1 use_max=true ans_exist=true 11112" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=20000 type=spec1 use_max=true ans_exist=true 11113" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=100 type=spec1 use_max=true ans_exist=true 11114" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=100000 type=spec1 use_max=true ans_exist=true 11153" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=190000 type=spec1 use_max=true ans_exist=true 11164" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=190000 type=spec1 use_max=true ans_exist=false 111642" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=10000 type=spec1 use_max=true ans_exist=false 111644" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=50000 type=spec1 use_max=true ans_exist=false 111645" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=100000 type=spec1 use_max=true ans_exist=false 111646" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=2 type=one_line use_max=true 1231" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=3 type=one_line use_max=true 1232" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=5 type=one_line use_max=true 1233" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=1000 type=one_line use_max=true 1234" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=200000 type=one_line use_max=true 1235" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=199000 type=one_line use_max=true 1236" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 type=full_binary use_max=true ans_exist=true 234324" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 type=full_binary use_max=true ans_exist=true 2343241" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 type=full_binary use_max=true ans_exist=true 2343242" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=3 type=full_binary use_max=true ans_exist=false 23432" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=4 type=full_binary use_max=true ans_exist=false 234321" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=5 type=full_binary use_max=true ans_exist=false 234322" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=10 type=full_binary use_max=true ans_exist=false 234323" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=20 type=full_binary use_max=true ans_exist=false 234324" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=50 type=full_binary use_max=true ans_exist=false 234325" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=1000 type=full_binary use_max=true ans_exist=false 234326" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=100000 type=full_binary use_max=true ans_exist=false 234326" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=200000 type=full_binary use_max=true ans_exist=false 234326" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=3 type=sun use_max=true ans_exist=true 1111221" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=4 type=sun use_max=true ans_exist=true 1111222" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=5 type=sun use_max=true ans_exist=true 1111223" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=10 type=sun use_max=true ans_exist=true 1111224" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=50 type=sun use_max=true ans_exist=true 1111225" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=150 type=sun use_max=true ans_exist=true 1111226" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=500 type=sun use_max=true ans_exist=true 1111227" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=10000 type=sun use_max=true ans_exist=true 1111228" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=100000 type=sun use_max=true ans_exist=true 1111229" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=500 type=sun use_max=true ans_exist=false 11112271" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=100 type=sun use_max=true ans_exist=false 11112272" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=10 type=sun use_max=true ans_exist=false 11112273" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=500 type=random2 use_max=true ans_exist=true 12111321" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=500 type=random2 use_max=true ans_exist=true 12111322" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=500 type=random2 use_max=true ans_exist=true 12111323" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=500 type=random2 use_max=true ans_exist=true 12111324" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=500 type=random2 use_max=true ans_exist=true 12111325" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=500 type=random2 use_max=true ans_exist=true 12111326" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=500 type=random2 use_max=true ans_exist=true 12111327" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=500 type=random2 use_max=true ans_exist=false 12217732" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=50 type=random2 use_max=true ans_exist=false 12317732" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=2 type=random2 use_max=true ans_exist=false 12417732" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=100000 type=random2 use_max=true ans_exist=false 12517732" method="generated"/>
+                <test cmd="Equidistant_gen max_n=200000 max_m=200000 type=random2 use_max=false ans_exist=false 12617732" method="generated"/>
+                <test method="manual"/>
+            </tests>
+        </testset>
+    </judging>
+    <files>
+        <resources>
+            <file path="files/olymp.sty"/>
+            <file path="files/problem.tex"/>
+            <file path="files/statements.ftl"/>
+            <file path="files/testlib.h" type="h.g++"/>
+            <file path="files/tutorial.tex"/>
+        </resources>
+        <executables>
+            <executable>
+                <source path="files/Equidistant_gen.java" type="java8"/>
+                <binary path="files/Equidistant_gen.jar" type="jar"/>
+            </executable>
+            <executable>
+                <source path="files/checker.cpp" type="cpp.g++17"/>
+                <binary path="files/checker.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/validator.cpp" type="cpp.g++17"/>
+                <binary path="files/validator.exe" type="exe.win32"/>
+            </executable>
+        </executables>
+    </files>
+    <assets>
+        <checker type="testlib">
+            <source path="files/checker.cpp" type="cpp.g++17"/>
+            <binary path="check.exe" type="exe.win32"/>
+            <copy path="check.cpp" type="cpp.g++17"/>
+            <testset>
+                <test-count>2</test-count>
+                <input-path-pattern>files/tests/checker-tests/%02d</input-path-pattern>
+                <output-path-pattern>files/tests/checker-tests/%02d.o</output-path-pattern>
+                <answer-path-pattern>files/tests/checker-tests/%02d.a</answer-path-pattern>
+                <tests>
+                    <test verdict="ok"/>
+                    <test verdict="wrong-answer"/>
+                </tests>
+            </testset>
+        </checker>
+        <validators>
+            <validator>
+                <source path="files/validator.cpp" type="cpp.g++17"/>
+                <binary path="files/validator.exe" type="exe.win32"/>
+                <testset>
+                    <test-count>6</test-count>
+                    <input-path-pattern>files/tests/validator-tests/%02d</input-path-pattern>
+                    <tests>
+                        <test verdict="valid"/>
+                        <test verdict="valid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="valid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                    </tests>
+                </testset>
+            </validator>
+        </validators>
+        <solutions>
+            <solution tag="main">
+                <source path="solutions/Equidistant_bm.java" type="java8"/>
+                <binary path="solutions/Equidistant_bm.jar" type="jar"/>
+            </solution>
+            <solution tag="time-limit-exceeded">
+                <source path="solutions/Equidistant_bm_tl.java" type="java8"/>
+                <binary path="solutions/Equidistant_bm_tl.jar" type="jar"/>
+            </solution>
+            <solution tag="wrong-answer">
+                <source path="solutions/Equidistant_bm_wa.java" type="java8"/>
+                <binary path="solutions/Equidistant_bm_wa.jar" type="jar"/>
+            </solution>
+            <solution tag="accepted">
+                <source path="solutions/Equidistant_gk.java" type="java8"/>
+                <binary path="solutions/Equidistant_gk.jar" type="jar"/>
+            </solution>
+            <solution tag="accepted">
+                <source path="solutions/Equidistant_gk_ok_reader.java" type="java8"/>
+                <binary path="solutions/Equidistant_gk_ok_reader.jar" type="jar"/>
+            </solution>
+        </solutions>
+    </assets>
+    <properties>
+        <property name="tests-wellformed" value="true"/>
+    </properties>
+    <stresses>
+        <stress-count>0</stress-count>
+        <stress-path-pattern>stresses/%03d</stress-path-pattern>
+        <list/>
+    </stresses>
+    <tags>
+        <tag value="trees"/>
+    </tags>
+</problem>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<problem revision="18" short-name="double-palindrome" url="https://polygon.codeforces.com/p1AAhDX/tourist/double-palindrome">
+    <names>
+        <name language="english" value="Double Palindrome"/>
+    </names>
+    <statements>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/english/problem.tex" type="application/x-tex"/>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/.html/english/problem.html" type="text/html"/>
+        <statement language="english" path="statements/.pdf/english/problem.pdf" type="application/pdf"/>
+    </statements>
+    <tutorials>
+        <tutorial charset="UTF-8" language="english" mathjax="true" path="statements/english/tutorial.tex" type="application/x-tex"/>
+        <tutorial language="english" path="statements/.pdf/english/tutorial.pdf" type="application/pdf"/>
+    </tutorials>
+    <judging cpu-name="Intel(R) Core(TM) i3-8100 CPU @ 3.60GHz" cpu-speed="3600" input-file="" output-file="">
+        <testset name="tests">
+            <time-limit>2000</time-limit>
+            <memory-limit>536870912</memory-limit>
+            <test-count>82</test-count>
+            <input-path-pattern>tests/%02d</input-path-pattern>
+            <answer-path-pattern>tests/%02d.a</answer-path-pattern>
+            <tests>
+                <test method="manual" sample="true"/>
+                <test method="manual" sample="true"/>
+                <test method="manual" sample="true"/>
+                <test cmd="gen_echo 1 1" method="generated"/>
+                <test cmd="gen_echo 1 2" method="generated"/>
+                <test cmd="gen_echo 1 26" method="generated"/>
+                <test cmd="gen_echo 2 1" method="generated"/>
+                <test cmd="gen_echo 2 2" method="generated"/>
+                <test cmd="gen_echo 2 3" method="generated"/>
+                <test cmd="gen_echo 2 26" method="generated"/>
+                <test cmd="gen_echo 5 26" method="generated"/>
+                <test cmd="gen_random 20 26 1" method="generated"/>
+                <test cmd="gen_random 20 26 2" method="generated"/>
+                <test cmd="gen_random 20 26 3" method="generated"/>
+                <test cmd="gen_random 20 26 4" method="generated"/>
+                <test cmd="gen_random 20 26 5" method="generated"/>
+                <test cmd="gen_random 20 26 6" method="generated"/>
+                <test cmd="gen_random 20 26 7" method="generated"/>
+                <test cmd="gen_random 20 26 8" method="generated"/>
+                <test cmd="gen_random 20 26 9" method="generated"/>
+                <test cmd="gen_random 20 26 10" method="generated"/>
+                <test cmd="gen_random 99 26 1" method="generated"/>
+                <test cmd="gen_random 99 26 2" method="generated"/>
+                <test cmd="gen_random 99 26 3" method="generated"/>
+                <test cmd="gen_random 99 26 4" method="generated"/>
+                <test cmd="gen_random 99 26 5" method="generated"/>
+                <test cmd="gen_random 99 26 6" method="generated"/>
+                <test cmd="gen_random 99 26 7" method="generated"/>
+                <test cmd="gen_random 99 26 8" method="generated"/>
+                <test cmd="gen_random 99 26 9" method="generated"/>
+                <test cmd="gen_random 99 26 10" method="generated"/>
+                <test cmd="gen_random 1000 26 12" method="generated"/>
+                <test cmd="gen_random 1000 26 13" method="generated"/>
+                <test cmd="gen_random 1000 26 14" method="generated"/>
+                <test cmd="gen_random 1000 26 15" method="generated"/>
+                <test cmd="gen_random 1000 26 16" method="generated"/>
+                <test cmd="gen_random 1000 26 17" method="generated"/>
+                <test cmd="gen_random 1000 26 18" method="generated"/>
+                <test cmd="gen_random 1000 26 19" method="generated"/>
+                <test cmd="gen_random 1000 26 20" method="generated"/>
+                <test cmd="gen_random 1000 26 21" method="generated"/>
+                <test cmd="gen_random 1000 26 22" method="generated"/>
+                <test cmd="gen_random 10000 26 33" method="generated"/>
+                <test cmd="gen_random 10000 26 34" method="generated"/>
+                <test cmd="gen_random 10000 26 35" method="generated"/>
+                <test cmd="gen_random 10000 26 36" method="generated"/>
+                <test cmd="gen_random 10000 26 37" method="generated"/>
+                <test cmd="gen_random 10000 26 38" method="generated"/>
+                <test cmd="gen_random 10000 26 39" method="generated"/>
+                <test cmd="gen_random 10000 26 40" method="generated"/>
+                <test cmd="gen_random 10000 26 41" method="generated"/>
+                <test cmd="gen_random 10000 26 42" method="generated"/>
+                <test cmd="gen_random 10000 26 43" method="generated"/>
+                <test cmd="gen_random 10000 26 44" method="generated"/>
+                <test cmd="gen_random 10000 26 45" method="generated"/>
+                <test cmd="gen_random 100000 26 47" method="generated"/>
+                <test cmd="gen_random 100000 26 48" method="generated"/>
+                <test cmd="gen_random 100000 26 49" method="generated"/>
+                <test cmd="gen_random 100000 26 50" method="generated"/>
+                <test cmd="gen_random 100000 26 51" method="generated"/>
+                <test cmd="gen_random 100000 26 52" method="generated"/>
+                <test cmd="gen_random 100000 26 53" method="generated"/>
+                <test cmd="gen_random 100000 26 54" method="generated"/>
+                <test cmd="gen_random 100000 26 55" method="generated"/>
+                <test cmd="gen_random 100000 26 56" method="generated"/>
+                <test cmd="gen_random 100000 26 57" method="generated"/>
+                <test cmd="gen_random 100000 26 58" method="generated"/>
+                <test cmd="gen_random 100000 26 59" method="generated"/>
+                <test cmd="gen_random 100000 26 60" method="generated"/>
+                <test cmd="gen_random 100000 26 61" method="generated"/>
+                <test cmd="gen_random 100000 26 62" method="generated"/>
+                <test cmd="gen_echo 100000 1" method="generated"/>
+                <test cmd="gen_echo 100000 2" method="generated"/>
+                <test cmd="gen_echo 100000 3" method="generated"/>
+                <test cmd="gen_echo 100000 7" method="generated"/>
+                <test cmd="gen_echo 100000 25" method="generated"/>
+                <test cmd="gen_echo 100000 26" method="generated"/>
+                <test cmd="gen_echo 99999 1" method="generated"/>
+                <test cmd="gen_echo 99999 2" method="generated"/>
+                <test cmd="gen_echo 99999 5" method="generated"/>
+                <test cmd="gen_echo 99999 26" method="generated"/>
+                <test cmd="gen_echo 99761 13" method="generated"/>
+            </tests>
+        </testset>
+    </judging>
+    <files>
+        <resources>
+            <file path="files/olymp.sty"/>
+            <file path="files/problem.tex"/>
+            <file path="files/statements.ftl"/>
+            <file path="files/testlib.h" type="h.g++"/>
+            <file path="files/tutorial.tex"/>
+        </resources>
+        <executables>
+            <executable>
+                <source path="files/gen_echo.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_echo.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_random.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_random.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/validate.cpp" type="cpp.g++17"/>
+                <binary path="files/validate.exe" type="exe.win32"/>
+            </executable>
+        </executables>
+    </files>
+    <assets>
+        <checker name="std::ncmp.cpp" type="testlib">
+            <source path="files/check.cpp" type="cpp.g++17"/>
+            <binary path="check.exe" type="exe.win32"/>
+            <copy path="check.cpp"/>
+            <testset>
+                <test-count>0</test-count>
+                <input-path-pattern>files/tests/checker-tests/%02d</input-path-pattern>
+                <output-path-pattern>files/tests/checker-tests/%02d.o</output-path-pattern>
+                <answer-path-pattern>files/tests/checker-tests/%02d.a</answer-path-pattern>
+                <tests/>
+            </testset>
+        </checker>
+        <validators>
+            <validator>
+                <source path="files/validate.cpp" type="cpp.g++17"/>
+                <binary path="files/validate.exe" type="exe.win32"/>
+                <testset>
+                    <test-count>9</test-count>
+                    <input-path-pattern>files/tests/validator-tests/%02d</input-path-pattern>
+                    <tests>
+                        <test verdict="valid"/>
+                        <test verdict="valid"/>
+                        <test verdict="valid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="valid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                    </tests>
+                </testset>
+            </validator>
+        </validators>
+        <solutions>
+            <solution tag="accepted">
+                <source path="solutions/DoublePalindrome_gk.java" type="java8"/>
+                <binary path="solutions/DoublePalindrome_gk.jar" type="jar"/>
+            </solution>
+            <solution tag="time-limit-exceeded">
+                <source path="solutions/DoublePalindrome_gk_n2.java" type="java8"/>
+                <binary path="solutions/DoublePalindrome_gk_n2.jar" type="jar"/>
+            </solution>
+            <solution tag="accepted">
+                <source path="solutions/double_av.java" type="java8"/>
+                <binary path="solutions/double_av.jar" type="jar"/>
+            </solution>
+            <solution tag="main">
+                <source path="solutions/sol.cpp" type="cpp.g++17"/>
+                <binary path="solutions/sol.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="time-limit-exceeded">
+                <source path="solutions/soltl.cpp" type="cpp.g++17"/>
+                <binary path="solutions/soltl.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="rejected">
+                <source path="solutions/stupid.cpp" type="cpp.g++17"/>
+                <binary path="solutions/stupid.exe" type="exe.win32"/>
+            </solution>
+        </solutions>
+    </assets>
+    <properties>
+        <property name="tests-wellformed" value="true"/>
+    </properties>
+    <stresses>
+        <stress-count>0</stress-count>
+        <stress-path-pattern>stresses/%03d</stress-path-pattern>
+        <list/>
+    </stresses>
+    <tags>
+        <tag value="dp"/>
+        <tag value="palindromes"/>
+    </tags>
+</problem>

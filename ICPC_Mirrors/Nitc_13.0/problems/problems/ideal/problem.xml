@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<problem revision="24" short-name="ideal" url="https://polygon.codeforces.com/p5uGJsr/izban/ideal">
+    <names>
+        <name language="english" value="Ideal Pyramid"/>
+    </names>
+    <statements>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/english/problem.tex" type="application/x-tex"/>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/.html/english/problem.html" type="text/html"/>
+        <statement language="english" path="statements/.pdf/english/problem.pdf" type="application/pdf"/>
+    </statements>
+    <tutorials>
+        <tutorial charset="UTF-8" language="english" mathjax="true" path="statements/english/tutorial.tex" type="application/x-tex"/>
+        <tutorial language="english" path="statements/.pdf/english/tutorial.pdf" type="application/pdf"/>
+    </tutorials>
+    <judging cpu-name="Intel(R) Core(TM) i3-8100 CPU @ 3.60GHz" cpu-speed="3600" input-file="" output-file="">
+        <testset name="tests">
+            <time-limit>2000</time-limit>
+            <memory-limit>536870912</memory-limit>
+            <test-count>41</test-count>
+            <input-path-pattern>tests/%02d</input-path-pattern>
+            <answer-path-pattern>tests/%02d.a</answer-path-pattern>
+            <tests>
+                <test method="manual" sample="true"/>
+                <test method="manual" sample="true"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test cmd="gen type=Rand n=1 c=1" method="generated"/>
+                <test cmd="gen type=Rand n=1" method="generated"/>
+                <test cmd="gen type=Rand n=2 c=2" method="generated"/>
+                <test cmd="gen type=Rand n=2" method="generated"/>
+                <test cmd="gen type=Rand n=3 c=3" method="generated"/>
+                <test cmd="gen type=Rand n=3" method="generated"/>
+                <test cmd="gen type=Rand n=4 c=4" method="generated"/>
+                <test cmd="gen type=Rand n=4" method="generated"/>
+                <test cmd="gen type=Rand n=5 c=5" method="generated"/>
+                <test cmd="gen type=Rand n=5" method="generated"/>
+                <test cmd="gen type=Rand n=10 c=10" method="generated"/>
+                <test cmd="gen type=Rand n=10" method="generated"/>
+                <test cmd="gen type=Rand n=30 c=30" method="generated"/>
+                <test cmd="gen type=Rand n=30" method="generated"/>
+                <test cmd="gen type=Rand n=100 c=100" method="generated"/>
+                <test cmd="gen type=Rand n=100" method="generated"/>
+                <test cmd="gen type=Rand n=300 c=300" method="generated"/>
+                <test cmd="gen type=Rand n=300" method="generated"/>
+                <test cmd="gen type=Rand n=1000 c=1000" method="generated"/>
+                <test cmd="gen type=Rand n=1000" method="generated"/>
+                <test cmd="gen type=Rand n=1000 c=1" method="generated"/>
+                <test cmd="gen type=Rand n=1000 c=30" method="generated"/>
+                <test cmd="gen type=Rand n=1000 h=1" method="generated"/>
+                <test cmd="gen type=Rand n=1000 h=10" method="generated"/>
+                <test cmd="gen type=Rand n=999 c=5 h=10000000" method="generated"/>
+                <test cmd="gen type=Max n=1000 c=10000000" method="generated"/>
+                <test cmd="gen type=Rect n=1000 h=10000000 xl=23 xr=23 yl=0 yr=10000000" method="generated"/>
+                <test cmd="gen type=Rect n=1000 h=10000000 xl=-10000000 xr=10000000 yl=0 yr=0" method="generated"/>
+                <test cmd="gen type=Rect n=1000 h=1111 xl=-1000000 xr=1000000 yl=-10000000 yr=10000000" method="generated"/>
+                <test cmd="gen type=Line n=1000 x1=0 y1=0 x2=10000000 y2=1000000" method="generated"/>
+                <test cmd="gen type=Line n=1000 x1=0 y1=0 x2=239 y2=1000000" method="generated"/>
+            </tests>
+        </testset>
+    </judging>
+    <files>
+        <resources>
+            <file path="files/olymp.sty"/>
+            <file path="files/problem.tex"/>
+            <file path="files/statements.ftl"/>
+            <file path="files/testlib.h" type="h.g++"/>
+            <file path="files/tutorial.tex"/>
+        </resources>
+        <executables>
+            <executable>
+                <source path="files/checker.cpp" type="cpp.g++17"/>
+                <binary path="files/checker.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen.cpp" type="cpp.g++17"/>
+                <binary path="files/gen.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/validator.cpp" type="cpp.g++17"/>
+                <binary path="files/validator.exe" type="exe.win32"/>
+            </executable>
+        </executables>
+    </files>
+    <assets>
+        <checker type="testlib">
+            <source path="files/checker.cpp" type="cpp.g++17"/>
+            <binary path="check.exe" type="exe.win32"/>
+            <copy path="check.cpp" type="cpp.g++17"/>
+            <testset>
+                <test-count>15</test-count>
+                <input-path-pattern>files/tests/checker-tests/%02d</input-path-pattern>
+                <output-path-pattern>files/tests/checker-tests/%02d.o</output-path-pattern>
+                <answer-path-pattern>files/tests/checker-tests/%02d.a</answer-path-pattern>
+                <tests>
+                    <test verdict="ok"/>
+                    <test verdict="ok"/>
+                    <test verdict="ok"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="presentation-error"/>
+                    <test verdict="crashed"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="presentation-error"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="crashed"/>
+                </tests>
+            </testset>
+        </checker>
+        <validators>
+            <validator>
+                <source path="files/validator.cpp" type="cpp.g++17"/>
+                <binary path="files/validator.exe" type="exe.win32"/>
+                <testset>
+                    <test-count>11</test-count>
+                    <input-path-pattern>files/tests/validator-tests/%02d</input-path-pattern>
+                    <tests>
+                        <test verdict="valid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="valid"/>
+                        <test verdict="valid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="valid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                    </tests>
+                </testset>
+            </validator>
+        </validators>
+        <solutions>
+            <solution tag="accepted">
+                <source path="solutions/Ideal_gk.java" type="java8"/>
+                <binary path="solutions/Ideal_gk.jar" type="jar"/>
+            </solution>
+            <solution note="int32-based solution" tag="accepted">
+                <source path="solutions/Ideal_gk_ok_int.java" type="java8"/>
+                <binary path="solutions/Ideal_gk_ok_int.jar" type="jar"/>
+            </solution>
+            <solution tag="main">
+                <source path="solutions/ideal_iz.cpp" type="cpp.g++17"/>
+                <binary path="solutions/ideal_iz.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="accepted">
+                <source path="solutions/ideal_iz_wa.cpp" type="cpp.g++17"/>
+                <binary path="solutions/ideal_iz_wa.exe" type="exe.win32"/>
+            </solution>
+        </solutions>
+    </assets>
+    <properties>
+        <property name="tests-wellformed" value="true"/>
+    </properties>
+    <stresses>
+        <stress-count>0</stress-count>
+        <stress-path-pattern>stresses/%03d</stress-path-pattern>
+        <list/>
+    </stresses>
+    <tags>
+        <tag value="geometry"/>
+        <tag value="stereometry"/>
+    </tags>
+</problem>

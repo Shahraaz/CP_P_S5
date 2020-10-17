@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<problem revision="19" short-name="just-the-last-digit" url="https://polygon.codeforces.com/p6LmTNo/avasilyev/just-the-last-digit">
+    <names>
+        <name language="english" value="Just the Last Digit"/>
+    </names>
+    <statements>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/english/problem.tex" type="application/x-tex"/>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/.html/english/problem.html" type="text/html"/>
+        <statement language="english" path="statements/.pdf/english/problem.pdf" type="application/pdf"/>
+    </statements>
+    <tutorials>
+        <tutorial charset="UTF-8" language="english" mathjax="true" path="statements/english/tutorial.tex" type="application/x-tex"/>
+        <tutorial language="english" path="statements/.pdf/english/tutorial.pdf" type="application/pdf"/>
+    </tutorials>
+    <judging cpu-name="Intel(R) Core(TM) i3-8100 CPU @ 3.60GHz" cpu-speed="3600" input-file="" output-file="">
+        <testset name="tests">
+            <time-limit>2000</time-limit>
+            <memory-limit>536870912</memory-limit>
+            <test-count>24</test-count>
+            <input-path-pattern>tests/%02d</input-path-pattern>
+            <answer-path-pattern>tests/%02d.a</answer-path-pattern>
+            <tests>
+                <test method="manual" sample="true"/>
+                <test cmd="GenRandom 2 0" method="generated"/>
+                <test cmd="GenRandom 2 1" method="generated"/>
+                <test cmd="GenRandom 3 0" method="generated"/>
+                <test cmd="GenRandom 3 1" method="generated"/>
+                <test cmd="GenRandom 4 0" method="generated"/>
+                <test cmd="GenRandom 4 0.5" method="generated"/>
+                <test cmd="GenRandom 4 1" method="generated"/>
+                <test cmd="GenRandom 5 0.1" method="generated"/>
+                <test cmd="GenRandom 6 0.9" method="generated"/>
+                <test cmd="GenRandom 7 0.8" method="generated"/>
+                <test cmd="GenRandom 8 0.7" method="generated"/>
+                <test cmd="GenRandom 20 0.3" method="generated"/>
+                <test cmd="GenRandom 100 0.2" method="generated"/>
+                <test cmd="GenRandom 250 0.1" method="generated"/>
+                <test cmd="GenRandom 500 0" method="generated"/>
+                <test cmd="GenRandom 500 0.01" method="generated"/>
+                <test cmd="GenRandom 500 0.1" method="generated"/>
+                <test cmd="GenRandom 500 0.3" method="generated"/>
+                <test cmd="GenRandom 500 0.5" method="generated"/>
+                <test cmd="GenRandom 500 0.8" method="generated"/>
+                <test cmd="GenRandom 500 0.99" method="generated"/>
+                <test cmd="GenRandom 500 0.999" method="generated"/>
+                <test cmd="GenRandom 500 1" method="generated"/>
+            </tests>
+        </testset>
+    </judging>
+    <files>
+        <resources>
+            <file path="files/olymp.sty"/>
+            <file path="files/problem.tex"/>
+            <file path="files/statements.ftl"/>
+            <file path="files/testlib.h" type="h.g++"/>
+            <file path="files/tutorial.tex"/>
+        </resources>
+        <executables>
+            <executable>
+                <source path="files/GenRandom.java" type="java8"/>
+                <binary path="files/GenRandom.jar" type="jar"/>
+            </executable>
+            <executable>
+                <source path="files/checker.cpp" type="cpp.g++17"/>
+                <binary path="files/checker.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/validator.cpp" type="cpp.g++17"/>
+                <binary path="files/validator.exe" type="exe.win32"/>
+            </executable>
+        </executables>
+    </files>
+    <assets>
+        <checker type="testlib">
+            <source path="files/checker.cpp" type="cpp.g++17"/>
+            <binary path="check.exe" type="exe.win32"/>
+            <copy path="check.cpp" type="cpp.g++17"/>
+            <testset>
+                <test-count>5</test-count>
+                <input-path-pattern>files/tests/checker-tests/%02d</input-path-pattern>
+                <output-path-pattern>files/tests/checker-tests/%02d.o</output-path-pattern>
+                <answer-path-pattern>files/tests/checker-tests/%02d.a</answer-path-pattern>
+                <tests>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="ok"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="wrong-answer"/>
+                </tests>
+            </testset>
+        </checker>
+        <validators>
+            <validator>
+                <source path="files/validator.cpp" type="cpp.g++17"/>
+                <binary path="files/validator.exe" type="exe.win32"/>
+                <testset>
+                    <test-count>7</test-count>
+                    <input-path-pattern>files/tests/validator-tests/%02d</input-path-pattern>
+                    <tests>
+                        <test verdict="valid"/>
+                        <test verdict="valid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                    </tests>
+                </testset>
+            </validator>
+        </validators>
+        <solutions>
+            <solution tag="accepted">
+                <source path="solutions/Just_gk.java" type="java8"/>
+                <binary path="solutions/Just_gk.jar" type="jar"/>
+            </solution>
+            <solution tag="main">
+                <source path="solutions/just_the_last_digit_av.java" type="java8"/>
+                <binary path="solutions/just_the_last_digit_av.jar" type="jar"/>
+            </solution>
+        </solutions>
+    </assets>
+    <properties>
+        <property name="tests-wellformed" value="true"/>
+    </properties>
+    <stresses>
+        <stress-count>0</stress-count>
+        <stress-path-pattern>stresses/%03d</stress-path-pattern>
+        <list/>
+    </stresses>
+    <documents>
+        <document path="documents/description.txt" type="text/plain"/>
+    </documents>
+    <tags>
+        <tag value="dag"/>
+        <tag value="graphs"/>
+    </tags>
+</problem>

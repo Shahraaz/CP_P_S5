@@ -1,0 +1,29 @@
+\begin{problem}{King's Children}{standard input}{standard output}{2 seconds}{512 megabytes}
+
+The King of Byteland has decided to divide the country into provinces, one for each of his children.
+
+The map of Byteland is a rectangular matrix consisting of $n$ rows and $m$ columns. Each king's child has a castle, located in one of the cells of the matrix (each cell contains at most one castle). King wants to split the Byteland in the following way:
+\begin{itemize}
+\item Each province must be a rectangle.
+\item Each cell of the Byteland territory must belong to exactly one province.
+\item Each province must contain the castle of exactly one king's child, the owner of this province.
+\end{itemize}
+
+The king loves all his children, but one of them is his favorite. The king wants to split the kingdom in such a way that the area of the province that belongs to his favorite child is as large as possible. Can you help him to solve this tricky task?
+
+\InputFile
+The first line of the input contains two integers $n$ and $m$ ($1\le n, m\le 1000$). The following $n$ lines contain $m$ characters each. Each character represents one cell of the matrix. Character  `\t{.}' represents an empty cell, uppercase letters from `\t{A}' to `\t{Z}' represent the castles. Letter `\t{A}' corresponds to the castle of the king's favorite child. 
+
+All letters are different. There is exactly one letter `\t{A}'.
+
+\OutputFile
+Output the same matrix, replacing each character `\t{.}' with the lowercase letter, corresponding to the owner of the province containing this cell.
+
+\Example
+
+\begin{example}
+\exmpfile{example.01}{example.01.a}%
+\end{example}
+
+\end{problem}
+

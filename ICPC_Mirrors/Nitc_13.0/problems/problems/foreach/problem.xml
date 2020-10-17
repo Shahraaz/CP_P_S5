@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<problem revision="26" short-name="foreach" url="https://polygon.codeforces.com/p6urrIA/pkunyavskiy/foreach">
+    <names>
+        <name language="english" value="Foreach"/>
+    </names>
+    <statements>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/english/problem.tex" type="application/x-tex"/>
+        <statement language="english" path="statements/.pdf/english/problem.pdf" type="application/pdf"/>
+    </statements>
+    <tutorials>
+        <tutorial charset="UTF-8" language="english" mathjax="true" path="statements/english/tutorial.tex" type="application/x-tex"/>
+        <tutorial language="english" path="statements/.pdf/english/tutorial.pdf" type="application/pdf"/>
+    </tutorials>
+    <judging cpu-name="Intel(R) Core(TM) i3-8100 CPU @ 3.60GHz" cpu-speed="3600" input-file="" output-file="">
+        <testset name="tests">
+            <time-limit>2000</time-limit>
+            <memory-limit>536870912</memory-limit>
+            <test-count>40</test-count>
+            <input-path-pattern>tests/%02d</input-path-pattern>
+            <answer-path-pattern>tests/%02d.a</answer-path-pattern>
+            <tests>
+                <test method="manual" sample="true"/>
+                <test method="manual" sample="true"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test cmd="gen_rand 10 2 rand rand" method="generated"/>
+                <test cmd="gen_rand 10 2 rand yes" method="generated"/>
+                <test cmd="gen_rand 10 10 rand rand" method="generated"/>
+                <test cmd="gen_rand 10 10 rand yes" method="generated"/>
+                <test cmd="gen_rand 10 10 rand shuffle" method="generated"/>
+                <test cmd="gen_rand 10 10 rand shuffle seed17" method="generated"/>
+                <test cmd="gen_rand 50 2 rand rand" method="generated"/>
+                <test cmd="gen_rand 50 2 rand yes" method="generated"/>
+                <test cmd="gen_rand 50 2 rand shuffle" method="generated"/>
+                <test cmd="gen_rand 50 3 rand rand" method="generated"/>
+                <test cmd="gen_rand 50 3 rand yes" method="generated"/>
+                <test cmd="gen_rand 50 3 rand shuffle" method="generated"/>
+                <test cmd="gen_rand 50 10 rand rand" method="generated"/>
+                <test cmd="gen_rand 50 10 rand yes" method="generated"/>
+                <test cmd="gen_rand 50 10 rand shuffle" method="generated"/>
+                <test cmd="gen_rand 50 50 rand rand" method="generated"/>
+                <test cmd="gen_rand 50 50 rand yes" method="generated"/>
+                <test cmd="gen_rand 50 50 rand shuffle" method="generated"/>
+                <test cmd="gen_rand 50 100 rand rand" method="generated"/>
+                <test cmd="gen_rand 50 100 rand yes" method="generated"/>
+                <test cmd="gen_rand 50 100 rand shuffle" method="generated"/>
+                <test cmd="gen_rand 50 100 perm yes" method="generated"/>
+                <test cmd="gen_rand 50 100 perm same" method="generated"/>
+                <test cmd="gen_rand 50 100 perm rand" method="generated"/>
+                <test cmd="gen_rand 50 100 perm shuffle" method="generated"/>
+                <test cmd="gen_rand 50 2 01 10" method="generated"/>
+                <test cmd="gen_rand 49 2 01 10" method="generated"/>
+                <test cmd="gen_rand 50 2 rand 10" method="generated"/>
+                <test cmd="gen_rand 49 2 rand 10" method="generated"/>
+                <test cmd="gen_rand 50 2 10 rand" method="generated"/>
+                <test cmd="gen_rand 49 2 10 rand" method="generated"/>
+            </tests>
+        </testset>
+    </judging>
+    <files>
+        <resources>
+            <file path="files/olymp.sty"/>
+            <file path="files/problem.tex"/>
+            <file path="files/statements.ftl"/>
+            <file path="files/testlib.h" type="h.g++"/>
+            <file path="files/tutorial.tex"/>
+        </resources>
+        <executables>
+            <executable>
+                <source path="files/check.cpp" type="cpp.g++17"/>
+                <binary path="files/check.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_rand.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_rand.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/validate.cpp" type="cpp.g++17"/>
+                <binary path="files/validate.exe" type="exe.win32"/>
+            </executable>
+        </executables>
+    </files>
+    <assets>
+        <checker type="testlib">
+            <source path="files/check.cpp" type="cpp.g++17"/>
+            <binary path="check.exe" type="exe.win32"/>
+            <copy path="check.cpp" type="cpp.g++17"/>
+            <testset>
+                <test-count>6</test-count>
+                <input-path-pattern>files/tests/checker-tests/%02d</input-path-pattern>
+                <output-path-pattern>files/tests/checker-tests/%02d.o</output-path-pattern>
+                <answer-path-pattern>files/tests/checker-tests/%02d.a</answer-path-pattern>
+                <tests>
+                    <test verdict="ok"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="wrong-answer"/>
+                    <test verdict="crashed"/>
+                    <test verdict="wrong-answer"/>
+                </tests>
+            </testset>
+        </checker>
+        <validators>
+            <validator>
+                <source path="files/validate.cpp" type="cpp.g++17"/>
+                <binary path="files/validate.exe" type="exe.win32"/>
+                <testset>
+                    <test-count>4</test-count>
+                    <input-path-pattern>files/tests/validator-tests/%02d</input-path-pattern>
+                    <tests>
+                        <test verdict="valid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                    </tests>
+                </testset>
+            </validator>
+        </validators>
+        <solutions>
+            <solution tag="accepted">
+                <source path="solutions/Foreach_md.kt" type="kotlin"/>
+                <binary path="solutions/Foreach_md.jar" type="jar"/>
+            </solution>
+            <solution tag="main">
+                <source path="solutions/foreach_pkun.cpp" type="cpp.g++17"/>
+                <binary path="solutions/foreach_pkun.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="rejected">
+                <source path="solutions/foreach_pkun_wa.cpp" type="cpp.g++17"/>
+                <binary path="solutions/foreach_pkun_wa.exe" type="exe.win32"/>
+            </solution>
+        </solutions>
+    </assets>
+    <properties>
+        <property name="tests-wellformed" value="true"/>
+    </properties>
+    <stresses>
+        <stress-count>0</stress-count>
+        <stress-path-pattern>stresses/%03d</stress-path-pattern>
+        <list/>
+    </stresses>
+    <tags>
+        <tag value="constructive"/>
+        <tag value="php"/>
+    </tags>
+</problem>

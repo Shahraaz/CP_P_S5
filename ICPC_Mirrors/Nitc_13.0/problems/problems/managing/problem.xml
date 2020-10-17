@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<problem revision="21" short-name="managing" url="https://polygon.codeforces.com/p4VHSUK/mmirzayanov/managing">
+    <names>
+        <name language="english" value="Managing Difficulties"/>
+    </names>
+    <statements>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/english/problem.tex" type="application/x-tex"/>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/.html/english/problem.html" type="text/html"/>
+        <statement language="english" path="statements/.pdf/english/problem.pdf" type="application/pdf"/>
+    </statements>
+    <tutorials>
+        <tutorial charset="UTF-8" language="english" mathjax="true" path="statements/english/tutorial.tex" type="application/x-tex"/>
+        <tutorial language="english" path="statements/.pdf/english/tutorial.pdf" type="application/pdf"/>
+    </tutorials>
+    <judging cpu-name="Intel(R) Core(TM) i3-8100 CPU @ 3.60GHz" cpu-speed="3600" input-file="" output-file="">
+        <testset name="tests">
+            <time-limit>2000</time-limit>
+            <memory-limit>536870912</memory-limit>
+            <test-count>9</test-count>
+            <input-path-pattern>tests/%02d</input-path-pattern>
+            <answer-path-pattern>tests/%02d.a</answer-path-pattern>
+            <tests>
+                <test method="manual" sample="true"/>
+                <test cmd="g2 10 3 4" method="generated"/>
+                <test cmd="g2 10 5 6" method="generated"/>
+                <test cmd="g2 10 10 10" method="generated"/>
+                <test cmd="g2 10 2000 1000" method="generated"/>
+                <test cmd="g 10 2000 1000" method="generated"/>
+                <test cmd="g 10 2000 10000" method="generated"/>
+                <test cmd="g 10 2000 100000" method="generated"/>
+                <test cmd="g 10 2000 1" method="generated"/>
+            </tests>
+        </testset>
+    </judging>
+    <files>
+        <resources>
+            <file path="files/olymp.sty"/>
+            <file path="files/problem.tex"/>
+            <file path="files/statements.ftl"/>
+            <file path="files/testlib.h" type="h.g++"/>
+            <file path="files/tutorial.tex"/>
+        </resources>
+        <executables>
+            <executable>
+                <source path="files/g.cpp" type="cpp.g++17"/>
+                <binary path="files/g.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/g2.cpp" type="cpp.g++17"/>
+                <binary path="files/g2.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/v.cpp" type="cpp.g++17"/>
+                <binary path="files/v.exe" type="exe.win32"/>
+            </executable>
+        </executables>
+    </files>
+    <assets>
+        <checker name="std::ncmp.cpp" type="testlib">
+            <source path="files/check.cpp" type="cpp.g++17"/>
+            <binary path="check.exe" type="exe.win32"/>
+            <copy path="check.cpp"/>
+            <testset>
+                <test-count>0</test-count>
+                <input-path-pattern>files/tests/checker-tests/%02d</input-path-pattern>
+                <output-path-pattern>files/tests/checker-tests/%02d.o</output-path-pattern>
+                <answer-path-pattern>files/tests/checker-tests/%02d.a</answer-path-pattern>
+                <tests/>
+            </testset>
+        </checker>
+        <validators>
+            <validator>
+                <source path="files/v.cpp" type="cpp.g++17"/>
+                <binary path="files/v.exe" type="exe.win32"/>
+                <testset>
+                    <test-count>2</test-count>
+                    <input-path-pattern>files/tests/validator-tests/%02d</input-path-pattern>
+                    <tests>
+                        <test verdict="invalid"/>
+                        <test verdict="invalid"/>
+                    </tests>
+                </testset>
+            </validator>
+        </validators>
+        <solutions>
+            <solution tag="accepted">
+                <source path="solutions/Main.java" type="java8"/>
+                <binary path="solutions/Main.jar" type="jar"/>
+            </solution>
+            <solution tag="accepted">
+                <source path="solutions/Managing_gk.java" type="java8"/>
+                <binary path="solutions/Managing_gk.jar" type="jar"/>
+            </solution>
+            <solution tag="time-limit-exceeded-or-accepted">
+                <source path="solutions/Managing_gk_py.py" type="python.3"/>
+                <binary path="solutions/Managing_gk_py.pys3" type="pythonx.3"/>
+            </solution>
+            <solution tag="accepted">
+                <source path="solutions/Managing_gk_pypy.py" type="python.pypy3"/>
+                <binary path="solutions/Managing_gk_pypy.pypys3" type="pythonx.pypy3"/>
+            </solution>
+            <solution tag="time-limit-exceeded">
+                <source path="solutions/slow.cpp" type="cpp.g++17"/>
+                <binary path="solutions/slow.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="main">
+                <source path="solutions/solution.cpp" type="cpp.g++17"/>
+                <binary path="solutions/solution.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="time-limit-exceeded-or-accepted">
+                <source path="solutions/solution_py.py" type="python.pypy3"/>
+                <binary path="solutions/solution_py.pypys3" type="pythonx.pypy3"/>
+            </solution>
+        </solutions>
+    </assets>
+    <properties>
+        <property name="tests-wellformed" value="true"/>
+    </properties>
+    <stresses>
+        <stress-count>0</stress-count>
+        <stress-path-pattern>stresses/%03d</stress-path-pattern>
+        <list/>
+    </stresses>
+    <tags>
+        <tag value="implementation"/>
+    </tags>
+</problem>

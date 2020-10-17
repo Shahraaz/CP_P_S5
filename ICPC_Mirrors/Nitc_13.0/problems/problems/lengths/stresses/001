@@ -1,0 +1,1 @@
+{"id":"c1dc669973de8145901ab8ebdf6aec76","index":1,"scriptPattern":"gen_rand 1000","inputFile":"stdin","outputFile":"stdout","memoryLimit":512,"timeLimit":2000,"totalTimeLimit":60000,"solutionNames":["critical-exponent_n2_ag.cpp","critical-exponent_ag.cpp"],"description":"","solutionNamesUid":""}

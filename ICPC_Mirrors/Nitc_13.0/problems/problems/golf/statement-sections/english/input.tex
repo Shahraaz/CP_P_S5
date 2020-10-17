@@ -1,0 +1,14 @@
+The first line contains two integers $w$ and $h$, the width and the height of the golf course in inches ($4 \le w, h \le 5 \cdot 10^8$). A coordinate system is introduced in such a way that the corners of the golf course have coordinates $(0, 0)$, $(w, 0)$, $(w, h)$, $(0, h)$, and the point $(1, 1)$ is to the north-east of the point $(0, 0)$.
+
+The second line contains a single integer $n$, denoting the number of vertices in the polygon ($4 \le n \le 1000$).
+
+Each of the following $n$ lines contains two integers $x_i$ and $y_i$, denoting the coordinates of the $i$-th vertex ($1 \le x_i \le w - 1$; $1 \le y_i \le h - 1$). The vertices are listed in traversal order.
+
+All polygon vertices are distinct and none of them lie at the polygon's edge.
+All polygon edges are either vertical ($x_i = x_{i+1}$; $x_n=x_1$) or horizontal ($y_i = y_{i+1}$; $y_n=y_1$), and none of them intersects another.
+
+The next line contains a single integer $t$, denoting the number of starting points for a shot ($1 \le t \le 100$).
+
+Each of the following $t$ lines contains two integers $\tilde{x}_i$ and $\tilde{y}_i$, denoting the coordinates of the $i$-th starting point ($1 \le \tilde{x}_i \le w - 1$; $1 \le \tilde{y}_i \le h - 1$). No starting point lies inside or on the border of the pond.
+
+Note that all starting points are independent of each other. In particular, you can assume that there is exactly one ball inside the golf course at any moment.

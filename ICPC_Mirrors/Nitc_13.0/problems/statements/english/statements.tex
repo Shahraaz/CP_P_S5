@@ -1,0 +1,73 @@
+\documentclass [11pt, a4paper, oneside] {article}
+
+\usepackage [T2A] {fontenc}
+\usepackage [utf8] {inputenc}
+\usepackage [english, russian] {babel}
+\usepackage {amsmath}
+\usepackage {amssymb}
+\usepackage {olymp}
+\usepackage {comment}
+\usepackage {epigraph}
+\usepackage {expdlist}
+\usepackage {graphicx}
+\usepackage {ulem}
+\usepackage {import}
+\usepackage{ifpdf}
+\ifpdf
+  \DeclareGraphicsRule{*}{mps}{*}{}
+\fi
+
+\begin {document}
+
+\contest
+{ICPC 2019-2020 North-Western Russia Regional Contest}%
+{Russia, St Petersburg}%
+{October 26, 2019}%
+
+\binoppenalty=10000
+\relpenalty=10000
+
+\renewcommand{\t}{\texttt}
+
+
+\graphicspath{{../../problems/accurate-movement/statements/english/}}
+  \def\ProblemIndex{A}
+\import{../../problems/accurate-movement/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/bad-treap/statements/english/}}
+  \def\ProblemIndex{B}
+\import{../../problems/bad-treap/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/cross-stitch/statements/english/}}
+  \def\ProblemIndex{C}
+\import{../../problems/cross-stitch/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/double-palindrome/statements/english/}}
+  \def\ProblemIndex{D}
+\import{../../problems/double-palindrome/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/equidistant/statements/english/}}
+  \def\ProblemIndex{E}
+\import{../../problems/equidistant/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/foreach/statements/english/}}
+  \def\ProblemIndex{F}
+\import{../../problems/foreach/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/golf/statements/english/}}
+  \def\ProblemIndex{G}
+\import{../../problems/golf/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/high/statements/english/}}
+  \def\ProblemIndex{H}
+\import{../../problems/high/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/ideal/statements/english/}}
+  \def\ProblemIndex{I}
+\import{../../problems/ideal/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/just-the-last-digit/statements/english/}}
+  \def\ProblemIndex{J}
+\import{../../problems/just-the-last-digit/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/kingdom/statements/english/}}
+  \def\ProblemIndex{K}
+\import{../../problems/kingdom/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/lengths/statements/english/}}
+  \def\ProblemIndex{L}
+\import{../../problems/lengths/statements/english/}{./problem.tex}
+\graphicspath{{../../problems/managing/statements/english/}}
+  \def\ProblemIndex{M}
+\import{../../problems/managing/statements/english/}{./problem.tex}
+
+\end {document}

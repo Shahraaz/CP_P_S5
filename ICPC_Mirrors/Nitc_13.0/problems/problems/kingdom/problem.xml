@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<problem revision="18" short-name="kingdom" url="https://polygon.codeforces.com/p398DSv/kgeorgiy/kingdom">
+    <names>
+        <name language="english" value="King's Children"/>
+    </names>
+    <statements>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/english/problem.tex" type="application/x-tex"/>
+        <statement charset="UTF-8" language="english" mathjax="true" path="statements/.html/english/problem.html" type="text/html"/>
+        <statement language="english" path="statements/.pdf/english/problem.pdf" type="application/pdf"/>
+    </statements>
+    <tutorials>
+        <tutorial charset="UTF-8" language="english" mathjax="true" path="statements/english/tutorial.tex" type="application/x-tex"/>
+        <tutorial language="english" path="statements/.pdf/english/tutorial.pdf" type="application/pdf"/>
+    </tutorials>
+    <judging cpu-name="Intel(R) Core(TM) i3-8100 CPU @ 3.60GHz" cpu-speed="3600" input-file="" output-file="">
+        <testset name="tests">
+            <time-limit>2000</time-limit>
+            <memory-limit>536870912</memory-limit>
+            <test-count>89</test-count>
+            <input-path-pattern>tests/%02d</input-path-pattern>
+            <answer-path-pattern>tests/%02d.a</answer-path-pattern>
+            <tests>
+                <test method="manual" sample="true"/>
+                <test cmd="gen_rand 8 10 7" method="generated"/>
+                <test cmd="gen_rand 18 25 10" method="generated"/>
+                <test cmd="gen_rand 17 30 15" method="generated"/>
+                <test cmd="gen_rand 1 1 1" method="generated"/>
+                <test cmd="gen_rand 5 5 25" method="generated"/>
+                <test cmd="gen_rand 4 6 24" method="generated"/>
+                <test cmd="gen_rand 6 4 24" method="generated"/>
+                <test cmd="gen_many_rect 872 423 26" method="generated"/>
+                <test cmd="gen_many_rect 432 812 26" method="generated"/>
+                <test cmd="gen_many_rect 1000 500 26" method="generated"/>
+                <test cmd="gen_many_rect 1000 1000 26" method="generated"/>
+                <test cmd="gen_many_corner 872 423 26 0" method="generated"/>
+                <test cmd="gen_many_corner 432 812 26 0" method="generated"/>
+                <test cmd="gen_many_corner 1000 500 26 0" method="generated"/>
+                <test cmd="gen_many_corner 1000 1000 26 0" method="generated"/>
+                <test cmd="gen_many_corner 872 423 26 1" method="generated"/>
+                <test cmd="gen_many_corner 432 812 26 1" method="generated"/>
+                <test cmd="gen_many_corner 1000 500 26 1" method="generated"/>
+                <test cmd="gen_many_corner 1000 1000 26 1" method="generated"/>
+                <test cmd="gen_many_corner 872 423 26 2" method="generated"/>
+                <test cmd="gen_many_corner 432 812 26 2" method="generated"/>
+                <test cmd="gen_many_corner 1000 500 26 2" method="generated"/>
+                <test cmd="gen_many_corner 1000 1000 26 2" method="generated"/>
+                <test cmd="gen_many_corner 872 423 26 3" method="generated"/>
+                <test cmd="gen_many_corner 432 812 26 3" method="generated"/>
+                <test cmd="gen_many_corner 1000 500 26 3" method="generated"/>
+                <test cmd="gen_many_corner 1000 1000 26 3" method="generated"/>
+                <test cmd="gen_many_corner 872 423 26 4" method="generated"/>
+                <test cmd="gen_many_corner 432 812 26 4" method="generated"/>
+                <test cmd="gen_many_corner 1000 500 26 4" method="generated"/>
+                <test cmd="gen_many_corner 1000 1000 26 4" method="generated"/>
+                <test cmd="gen_rand 1000 1000 1" method="generated"/>
+                <test cmd="gen_rand 1000 1000 26" method="generated"/>
+                <test cmd="gen_rand 1000 1 1" method="generated"/>
+                <test cmd="gen_rand 1000 1 26" method="generated"/>
+                <test cmd="gen_rand 1 1000 1" method="generated"/>
+                <test cmd="gen_rand 1 1000 26" method="generated"/>
+                <test description="Added from stress #1. Had script line &quot;gen_rand 10 10 5 7023122bb2d0843da8865b87637de909&quot;" method="manual"/>
+                <test method="manual"/>
+                <test method="manual"/>
+                <test cmd="gen_smart 1 5 0 1" method="generated"/>
+                <test cmd="gen_smart 5 1 0 1" method="generated"/>
+                <test cmd="gen_smart 2 2 0 1" method="generated"/>
+                <test cmd="gen_smart 1 5 1 1" method="generated"/>
+                <test cmd="gen_smart 5 1 1 1" method="generated"/>
+                <test cmd="gen_smart 2 2 1 1" method="generated"/>
+                <test cmd="gen_smart 1 5 2 1" method="generated"/>
+                <test cmd="gen_smart 5 1 2 1" method="generated"/>
+                <test cmd="gen_smart 2 2 2 1" method="generated"/>
+                <test cmd="gen_smart 1 5 3 1" method="generated"/>
+                <test cmd="gen_smart 5 1 3 1" method="generated"/>
+                <test cmd="gen_smart 2 2 3 1" method="generated"/>
+                <test cmd="gen_smart 1 5 0 2" method="generated"/>
+                <test cmd="gen_smart 5 1 0 2" method="generated"/>
+                <test cmd="gen_smart 2 2 0 2" method="generated"/>
+                <test cmd="gen_smart 1 5 1 2" method="generated"/>
+                <test cmd="gen_smart 5 1 1 2" method="generated"/>
+                <test cmd="gen_smart 2 2 1 2" method="generated"/>
+                <test cmd="gen_smart 1 5 2 2" method="generated"/>
+                <test cmd="gen_smart 5 1 2 2" method="generated"/>
+                <test cmd="gen_smart 2 2 2 2" method="generated"/>
+                <test cmd="gen_smart 1 5 3 2" method="generated"/>
+                <test cmd="gen_smart 5 1 3 2" method="generated"/>
+                <test cmd="gen_smart 2 2 3 2" method="generated"/>
+                <test cmd="gen_smart 1 5 0 3" method="generated"/>
+                <test cmd="gen_smart 5 1 0 3" method="generated"/>
+                <test cmd="gen_smart 2 2 0 3" method="generated"/>
+                <test cmd="gen_smart 1 5 1 3" method="generated"/>
+                <test cmd="gen_smart 5 1 1 3" method="generated"/>
+                <test cmd="gen_smart 2 2 1 3" method="generated"/>
+                <test cmd="gen_smart 1 5 2 3" method="generated"/>
+                <test cmd="gen_smart 5 1 2 3" method="generated"/>
+                <test cmd="gen_smart 2 2 2 3" method="generated"/>
+                <test cmd="gen_smart 1 5 3 3" method="generated"/>
+                <test cmd="gen_smart 5 1 3 3" method="generated"/>
+                <test cmd="gen_smart 2 2 3 3" method="generated"/>
+                <test cmd="gen_smart 1 5 0 4" method="generated"/>
+                <test cmd="gen_smart 5 1 0 4" method="generated"/>
+                <test cmd="gen_smart 2 2 0 4" method="generated"/>
+                <test cmd="gen_smart 1 5 1 4" method="generated"/>
+                <test cmd="gen_smart 5 1 1 4" method="generated"/>
+                <test cmd="gen_smart 2 2 1 4" method="generated"/>
+                <test cmd="gen_smart 1 5 2 4" method="generated"/>
+                <test cmd="gen_smart 5 1 2 4" method="generated"/>
+                <test cmd="gen_smart 2 2 2 4" method="generated"/>
+                <test cmd="gen_smart 1 5 3 4" method="generated"/>
+                <test cmd="gen_smart 5 1 3 4" method="generated"/>
+                <test cmd="gen_smart 2 2 3 4" method="generated"/>
+            </tests>
+        </testset>
+    </judging>
+    <files>
+        <resources>
+            <file path="files/olymp.sty"/>
+            <file path="files/problem.tex"/>
+            <file path="files/statements.ftl"/>
+            <file path="files/testlib.h" type="h.g++"/>
+            <file path="files/tutorial.tex"/>
+        </resources>
+        <executables>
+            <executable>
+                <source path="files/check.cpp" type="cpp.g++17"/>
+                <binary path="files/check.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_many_corner.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_many_corner.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_many_rect.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_many_rect.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_rand.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_rand.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/gen_smart.cpp" type="cpp.g++17"/>
+                <binary path="files/gen_smart.exe" type="exe.win32"/>
+            </executable>
+            <executable>
+                <source path="files/validate.cpp" type="cpp.g++17"/>
+                <binary path="files/validate.exe" type="exe.win32"/>
+            </executable>
+        </executables>
+    </files>
+    <assets>
+        <checker type="testlib">
+            <source path="files/check.cpp" type="cpp.g++17"/>
+            <binary path="check.exe" type="exe.win32"/>
+            <copy path="check.cpp" type="cpp.g++17"/>
+            <testset>
+                <test-count>0</test-count>
+                <input-path-pattern>files/tests/checker-tests/%02d</input-path-pattern>
+                <output-path-pattern>files/tests/checker-tests/%02d.o</output-path-pattern>
+                <answer-path-pattern>files/tests/checker-tests/%02d.a</answer-path-pattern>
+                <tests/>
+            </testset>
+        </checker>
+        <validators>
+            <validator>
+                <source path="files/validate.cpp" type="cpp.g++17"/>
+                <binary path="files/validate.exe" type="exe.win32"/>
+                <testset>
+                    <test-count>0</test-count>
+                    <input-path-pattern>files/tests/validator-tests/%02d</input-path-pattern>
+                    <tests/>
+                </testset>
+            </validator>
+        </validators>
+        <solutions>
+            <solution tag="wrong-answer">
+                <source path="solutions/kingdom_iq300.cpp" type="cpp.g++17"/>
+                <binary path="solutions/kingdom_iq300.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="accepted">
+                <source path="solutions/kingdom_iq300_random_shuffle.cpp" type="cpp.g++17"/>
+                <binary path="solutions/kingdom_iq300_random_shuffle.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="wrong-answer">
+                <source path="solutions/kingdom_iq300_wa.cpp" type="cpp.g++17"/>
+                <binary path="solutions/kingdom_iq300_wa.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="main">
+                <source path="solutions/kingdom_pm.cpp" type="cpp.g++17"/>
+                <binary path="solutions/kingdom_pm.exe" type="exe.win32"/>
+            </solution>
+            <solution tag="wrong-answer">
+                <source path="solutions/kingdom_pm_random.cpp" type="cpp.g++17"/>
+                <binary path="solutions/kingdom_pm_random.exe" type="exe.win32"/>
+            </solution>
+        </solutions>
+    </assets>
+    <properties>
+        <property name="tests-wellformed" value="true"/>
+    </properties>
+    <stresses>
+        <stress-count>1</stress-count>
+        <stress-path-pattern>stresses/%03d</stress-path-pattern>
+        <list>
+            <stress index="1" path="stresses/001"/>
+        </list>
+    </stresses>
+</problem>
