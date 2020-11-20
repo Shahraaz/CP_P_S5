@@ -34,60 +34,65 @@ int inverse(int x, int MOD)
     return power(x, MOD - 2, MOD);
 }
 
+struct custom_hash
+{
+    static uint64_t splitmix64(uint64_t x)
+    {
+        // http://xorshift.di.unimi.it/splitmix64.c
+        x += 0x9e3779b97f4a7c15;
+        x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9;
+        x = (x ^ (x >> 27)) * 0x94d049bb133111eb;
+        return x ^ (x >> 31);
+    }
+
+    size_t operator()(uint64_t x) const
+    {
+        static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
+        return splitmix64(x + FIXED_RANDOM);
+    }
+};
+
 void solveCase()
 {
     int n, p;
     cin >> n >> p;
     vector<int> a(n);
-    vector<int> params[n];
-    for (size_t i = 0; i < n; i++)
-    {
-        params[i].pb(i + 1);
-        params[i].pb(i + 2);
-    }
     for (auto &x : a)
         cin >> x;
-    vector<map<int, int>> dp(n);
-    map<int, deque<int>> idexes;
-    map<int, vector<int>> additionalChecks;
+    auto solve = [&](int q) -> int {
+        unordered_map<int, int, custom_hash> dp;
+        int ret = 0;
+        for (int i = n - 1; i >= 0; i--)
+        {
+            int next = (a[i] * 1LL * q) % p;
+            // db(i, a[i], next);
+            dp[a[i]] = max(dp[a[i]], dp[next] + 1);
+            ret = max(ret, dp[a[i]]);
+        }
+        // db(q, ret, dp);
+        return ret;
+    };
+    unordered_map<int, int, custom_hash> potential_q;
     for (int i = n - 1; i >= 0; i--)
     {
         int currinv = inverse(a[i], p);
-        for (auto &x : additionalChecks[a[i]])
-            params[i].pb(x);
-        sort(all(params[i]));
-        db(params[i]);
-        for (auto j : params[i])
-        {
+        for (auto j : {i + 1, i + 2})
             if (j < n)
             {
                 int q = (currinv * 1LL * a[j]) % p;
-                additionalChecks[(a[i] * 1LL * inverse(q, p)) % p].pb(i);
-                dp[i][q] = 2;
-                int next = (a[j] * 1LL * q) % p;
-                if (idexes[next].size())
-                {
-                    int ctr = 0;
-                    if (idexes[next][0] == j)
-                        ctr = 1;
-                    if (idexes[next].size() > ctr)
-                    {
-                        if (dp[idexes[next][ctr]][q] == 0)
-                            dp[idexes[next][ctr]][q] = 1;
-                        dp[i][q] = 2 + dp[idexes[next][ctr]][q];
-                    }
-                }
+                potential_q[q]++;
             }
-        }
-        db(i, a[i], dp[i]);
-        idexes[a[i]].push_front(i);
-        if (idexes[a[i]].size() > 2)
-            idexes[a[i]].pop_back();
     }
     int res = 1;
-    for (auto &x : dp)
-        for (auto &y : x)
-            res = max(res, y.s);
+    vector<pair<int, int>> invq;
+    for (auto &x : potential_q)
+        invq.push_back({x.s, x.f});
+    sort(all(invq));
+    reverse(all(invq));
+    db(invq);
+    int lim = min(10, (int)invq.size());
+    for (size_t i = 0; i < lim; i++)
+        res = max(res, solve(invq[i].s));
     if (res * 2 < n)
         res = -1;
     cout << res << '\n';
