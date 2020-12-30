@@ -32,11 +32,11 @@ void solveCase()
         if (s.substr(i, n) == t)
         {
             int lptr = i, rptr = lptr + n - 1;
-            ll t = (truelen - i) / (n);
+            ll t = (truelen - i - n) / 3;
             db(i, lptr, rptr, t);
             // cout << t << '\n';
             // return;
-            res += t;
+            res += t + 1;
         }
     cout << res << '\n';
 }
