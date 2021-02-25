@@ -22,8 +22,8 @@ void solveCase()
     {
         log1010[i] = log10l(i);
         fact[i] = fact[i - 1] + log1010[i];
-        cerr << fixed << setprecision(10);
-        db(i, log1010[i], fact[i]);
+        // cerr << fixed << setprecision(10);
+        // db(i, log1010[i], fact[i]);
     }
     ll res = 0;
 
