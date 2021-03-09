@@ -12,7 +12,6 @@ using namespace std;
 using ll = long long;
 const int NAX = 22, MOD = 1000000007;
 
-int mask[1 << NAX][NAX];
 int r, c;
 int getIdx(int x, int y)
 {
@@ -28,59 +27,75 @@ bool check_compat(int idx1, int idx2)
     auto j = getX_Y(idx2);
     return !(i.first == j.first || i.second == j.second || (i.first - i.second) == (j.first - j.second) || (i.first + i.second) == (j.first + j.second));
 }
-vector<pair<int, int>> ret;
-int solve(int s, int prev = 25)
+mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+// shuffle(permutation.begin(), permutation.end(), rng);
+
+vector<int> res, vis;
+vector<int> order;
+vector<int> adj[500];
+
+bool compat(int node)
 {
-    int cnt = __builtin_popcount(s);
-    if (cnt == r * c)
-    {
-        // cout << "POSSIBLE\n";
-        return true;
-    }
-    auto &ret = mask[s][prev];
-    if (ret >= 0)
-        return ret;
-    ret = false;
+    return res.empty() || check_compat(res.back(), node);
+}
+
+void dfs(int node)
+{
+    res.pb(node);
+    vis[node] = 1;
+    for (auto &x : adj[node])
+        if (!vis[x])
+            return dfs(x);
+}
+
+bool doable()
+{
+    shuffle(order.begin(), order.end(), rng);
     for (size_t i = 0; i < r * c; i++)
-    {
-        if (s & (1 << i))
-            continue;
-        if (prev == 25 || check_compat(prev, i))
-            if (solve(s | (1 << i), i))
-            {
-                ::ret.pb(getX_Y(i));
-                return ret = true;
-            }
-    }
-    return ret;
+        shuffle(all(adj[i]), rng);
+    fill(all(vis), 0);
+    res.clear();
+    db(r, c, order);
+    for (auto &x : order)
+        if (!vis[x])
+        {
+            if (compat(x))
+                dfs(x);
+            else
+                return false;
+        }
+    return count(all(vis), 1) == (r * c);
 }
 
 void solveCase()
 {
-    // cin >> r >> c;
-    for (size_t i = 2; i <= 5; i++)
+    r = 20, c = 20;
+    cin >> r >> c;
+    order.clear();
+    vis.resize(r * c);
+    for (size_t i = 0; i < r * c; i++)
     {
-        // cout << '\n';
-        for (size_t j = 2; j <= 5; j++)
+        adj[i].clear();
+        order.pb(i);
+        for (size_t j = 0; j < r * c; j++)
+            if (check_compat(i, j))
+                adj[i].pb(j);
+    }
+    const int TRIES = 100;
+    for (size_t i = 0; i < TRIES; i++)
+    {
+        if (doable())
         {
-            memset(mask, -1, sizeof mask);
-            r = i, c = j;
-            ret.clear();
-            db(r, c, solve(0));
-            auto now = solve(0);
-            // cout << solve(0) << ' ';
-            // cout << flush;
-            if (!now)
-                cout << "IMPOSSIBLE\n";
-            else
+            cout << "POSSIBLE\n";
+            for (auto &x : res)
             {
-                cout << "POSSIBLE\n";
-                reverse(all(ret));
-                for (auto &x : ret)
-                    cout << x.first << ' ' << x.second << '\n';
+                auto x_y = getX_Y(x);
+                cout << x_y.first + 1 << ' ' << x_y.second + 1 << '\n';
             }
+            return;
         }
     }
+    cout << "IMPOSSIBLE\n";
 }
 
 int32_t main()
@@ -89,7 +104,7 @@ int32_t main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 #endif
-    int t = 1;
+    int t = 100;
     cin >> t;
     for (int i = 1; i <= t; ++i)
     {
